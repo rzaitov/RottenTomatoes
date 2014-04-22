@@ -6,15 +6,15 @@ using MonoTouch.UIKit;
 
 namespace RottenTomatoes
 {
-	[Register("AppDelegate")]
+	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
 		private UIWindow window;
 
-		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			window = new UIWindow(UIScreen.MainScreen.Bounds);
-			window.MakeKeyAndVisible();
+			window = new UIWindow (UIScreen.MainScreen.Bounds);
+			window.MakeKeyAndVisible ();
 			return true;
 		}
 	}
