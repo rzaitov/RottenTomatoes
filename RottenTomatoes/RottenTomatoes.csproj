@@ -101,6 +101,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Screens\BoxOffice\BoxOfficeViewController.cs" />
+    <Compile Include="Screens\BoxOffice\BoxOfficeView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -108,5 +110,11 @@
       <Project>{4E70C764-8389-4D90-B2C0-924BE3EF0618}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Screens\" />
+    <Folder Include="Resources\New Folder\" />
+    <Folder Include="Screens\BoxOffice\" />
+    <Folder Include="Screens\MovieDetails\" />
   </ItemGroup>
 </Project>

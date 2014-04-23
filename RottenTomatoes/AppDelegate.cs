@@ -11,17 +11,22 @@ namespace RottenTomatoes
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
-		private UIWindow window;
+		private UIWindow _window;
+		private BoxOfficeViewController _boxOfficeViewController;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			window.MakeKeyAndVisible ();
+			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-			RottenTomatoesService service = new RottenTomatoesService ();
-			service.GetTopBoxOfficeAsync (movies => {
-				Console.WriteLine(movies);
-			});
+			_boxOfficeViewController = new BoxOfficeViewController ();
+			_window.RootViewController = _boxOfficeViewController;
+
+			_window.MakeKeyAndVisible ();
+
+//			RottenTomatoesService service = new RottenTomatoesService ();
+//			service.GetTopBoxOfficeAsync (movies => {
+//				Console.WriteLine(movies);
+//			});
 
 
 			return true;
