@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Indicators\fresh.png" />
+    <BundleResource Include="Resources\Indicators\rotten.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -107,6 +109,7 @@
     <Compile Include="Screens\BoxOffice\MovieCell.cs" />
     <Compile Include="ImgPath.cs" />
     <Compile Include="Common\ImageInitializer.cs" />
+    <Compile Include="Common\FrameContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

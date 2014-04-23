@@ -36,7 +36,9 @@
     <Compile Include="RottenTomatoesService.cs" />
     <Compile Include="Model\TopBoxOfficeModels.cs" />
     <Compile Include="Assert.cs" />
-    <Compile Include="RatingFormatter.cs" />
+    <Compile Include="Formatters\RatingFormatter.cs" />
+    <Compile Include="Formatters\ActorsFormatter.cs" />
+    <Compile Include="Formatters\RuntimeFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -64,5 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Formatters\" />
   </ItemGroup>
 </Project>

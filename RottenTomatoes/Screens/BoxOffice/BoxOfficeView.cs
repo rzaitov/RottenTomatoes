@@ -16,6 +16,7 @@ namespace RottenTomatoes
 
 			_table = new UITableView ();
 			_table.Source = _source = new BoxOfficeSource ();
+			_table.RowHeight = 91f;
 			AddSubview (_table);
 		}
 

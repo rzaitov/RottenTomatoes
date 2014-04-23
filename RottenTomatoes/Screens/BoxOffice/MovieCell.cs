@@ -2,6 +2,7 @@
 using MonoTouch.UIKit;
 
 using Logic;
+using System.Drawing;
 
 namespace RottenTomatoes
 {
@@ -9,21 +10,32 @@ namespace RottenTomatoes
 	{
 		private UILabel _movieTitle;
 		private UIImageView _thumbnail, _freshImg, _rottenImg;
-		private UILabel _criticScore, _actors, _mppaRating, _runtime;
+		private UILabel _criticScore, _actors, _mppaRuntime;
 
 		private readonly RatingFormatter _ratingFormatter;
+		private readonly ActorsFormatter _actorsFormatter;
+		private readonly RuntimeFormatter _runtimeFormatter;
 
 		public MovieCell (UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
 		{
 			_ratingFormatter = new RatingFormatter ();
+			_actorsFormatter = new ActorsFormatter ();
+			_runtimeFormatter = new RuntimeFormatter ();
 
-			_movieTitle = new UILabel ();
+			_thumbnail = new UIImageView {
+				BackgroundColor = UIColor.Gray
+			};
+			ContentView.AddSubview (_thumbnail);
+
+			_movieTitle = new UILabel {
+				TextColor = UIColor.Blue
+			};
 			ContentView.AddSubview (_movieTitle);
 
-//			_freshImg = ImageInitializer.InitImageView (ImgPath.Indicators.Fresh);
-//			_rottenImg = ImageInitializer.InitImageView (ImgPath.Indicators.Rotten);
-//			ContentView.AddSubviews (_freshImg, _rottenImg);
+			_freshImg = ImageInitializer.InitImageView (ImgPath.Indicators.Fresh);
+			_rottenImg = ImageInitializer.InitImageView (ImgPath.Indicators.Rotten);
+			ContentView.AddSubviews (_freshImg, _rottenImg);
 
 			_criticScore = new UILabel ();
 			ContentView.AddSubview (_criticScore);
@@ -31,11 +43,8 @@ namespace RottenTomatoes
 			_actors = new UILabel ();
 			ContentView.AddSubview (_actors);
 
-			_mppaRating = new UILabel ();
-			ContentView.AddSubview (_mppaRating);
-
-			_runtime = new UILabel ();
-			ContentView.AddSubview (_runtime);
+			_mppaRuntime = new UILabel ();
+			ContentView.AddSubview (_mppaRuntime);
 		}
 
 		public void Bind(Movie movie)
@@ -45,6 +54,27 @@ namespace RottenTomatoes
 
 			_criticScore.Text = _ratingFormatter.Format(movie.ratings.critics_score);
 			_criticScore.SizeToFit ();
+
+			_actors.Text = _actorsFormatter.Format (2, movie.abridged_cast);
+			_actors.SizeToFit ();
+
+			string runtime = _runtimeFormatter.Format (movie.runtime);
+			_mppaRuntime.Text = string.Format ("{0}, {1}", movie.mpaa_rating, runtime);
+			_mppaRuntime.SizeToFit ();
+
+			LayoutSubviews ();
+		}
+
+		public override void LayoutSubviews ()
+		{
+			base.LayoutSubviews ();
+
+			_thumbnail.Begin ().Size (new SizeF (61f, 91f)).Commit ();
+
+			_movieTitle.Begin ().AlignLeft (_thumbnail).FillRight().Commit ();
+
+			_mppaRuntime.Begin ().AlignRight().AlignBottom(). Commit ();
+
 		}
 	}
 }
