@@ -103,6 +103,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Screens\BoxOffice\BoxOfficeViewController.cs" />
     <Compile Include="Screens\BoxOffice\BoxOfficeView.cs" />
+    <Compile Include="Screens\BoxOffice\BoxOfficeSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

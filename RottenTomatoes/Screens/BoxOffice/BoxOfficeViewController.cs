@@ -1,5 +1,6 @@
 ﻿using System;
 using MonoTouch.UIKit;
+using Logic;
 
 namespace RottenTomatoes
 {
@@ -7,16 +8,26 @@ namespace RottenTomatoes
 	{
 		private BoxOfficeView _view;
 
-		public BoxOfficeViewController ()
+		private readonly RottenTomatoesService _service;
+
+		public BoxOfficeViewController (RottenTomatoesService service)
 		{
+			_service = service;
+		}
+
+		public override void LoadView ()
+		{
+			base.LoadView ();
+
+			_view = new BoxOfficeView ();
+			View = _view;
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			_service.GetTopBoxOfficeAsync();
 
-			_view = new BoxOfficeView ();
-			View = _view;
 		}
 	}
 }
