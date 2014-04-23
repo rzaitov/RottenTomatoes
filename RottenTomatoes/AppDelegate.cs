@@ -4,6 +4,8 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
+using Logic;
+
 namespace RottenTomatoes
 {
 	[Register ("AppDelegate")]
@@ -15,6 +17,13 @@ namespace RottenTomatoes
 		{
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 			window.MakeKeyAndVisible ();
+
+			RottenTomatoesService service = new RottenTomatoesService ();
+			service.GetTopBoxOfficeAsync (str => {
+				Console.WriteLine(str);
+			});
+
+
 			return true;
 		}
 	}

@@ -103,4 +103,10 @@
     <Compile Include="AppDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{4E70C764-8389-4D90-B2C0-924BE3EF0618}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
