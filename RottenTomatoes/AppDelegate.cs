@@ -14,11 +14,15 @@ namespace RottenTomatoes
 		private UIWindow _window;
 		private BoxOfficeViewController _boxOfficeViewController;
 
+		private RottenTomatoesService _service;
+
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			_service = new RottenTomatoesService ();
+
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 
-			_boxOfficeViewController = new BoxOfficeViewController ();
+			_boxOfficeViewController = new BoxOfficeViewController (_service);
 			_window.RootViewController = _boxOfficeViewController;
 
 			_window.MakeKeyAndVisible ();

@@ -26,8 +26,10 @@ namespace RottenTomatoes
 
 		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 		{
-			UITableViewCell cell = tableView.DequeueReusableCell (ReuseId);
-			cell = cell ?? new UITableViewCell (UITableViewCellStyle.Default, ReuseId);
+			MovieCell cell = (MovieCell)tableView.DequeueReusableCell (ReuseId);
+			cell = cell ?? new MovieCell (UITableViewCellStyle.Default, ReuseId);
+
+			cell.Bind (Movies [indexPath.Row]);
 
 			return cell;
 		}

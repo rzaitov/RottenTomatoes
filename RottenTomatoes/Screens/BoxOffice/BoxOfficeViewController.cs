@@ -26,8 +26,12 @@ namespace RottenTomatoes
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			_service.GetTopBoxOfficeAsync();
 
+			_service.GetTopBoxOfficeAsync (movies => {
+				BeginInvokeOnMainThread (() => {
+					_view.ShowMovies (movies);
+				});
+			});
 		}
 	}
 }

@@ -104,6 +104,9 @@
     <Compile Include="Screens\BoxOffice\BoxOfficeViewController.cs" />
     <Compile Include="Screens\BoxOffice\BoxOfficeView.cs" />
     <Compile Include="Screens\BoxOffice\BoxOfficeSource.cs" />
+    <Compile Include="Screens\BoxOffice\MovieCell.cs" />
+    <Compile Include="ImgPath.cs" />
+    <Compile Include="Common\ImageInitializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -114,8 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Screens\" />
-    <Folder Include="Resources\New Folder\" />
     <Folder Include="Screens\BoxOffice\" />
     <Folder Include="Screens\MovieDetails\" />
+    <Folder Include="Resources\Indicators\" />
+    <Folder Include="Common\" />
   </ItemGroup>
 </Project>

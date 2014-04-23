@@ -15,7 +15,7 @@ namespace RottenTomatoes
 			BackgroundColor = UIColor.White;
 
 			_table = new UITableView ();
-			_table = _source = new BoxOfficeSource ();
+			_table.Source = _source = new BoxOfficeSource ();
 			AddSubview (_table);
 		}
 
@@ -23,6 +23,13 @@ namespace RottenTomatoes
 		{
 			_source.Movies = movies;
 			_table.ReloadData ();
+		}
+
+		public override void LayoutSubviews ()
+		{
+			base.LayoutSubviews ();
+
+			_table.Frame = Bounds;
 		}
 	}
 }
