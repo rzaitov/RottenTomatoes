@@ -2,23 +2,22 @@
 using System.Net.Http;
 
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Logic
 {
 	public class RottenTomatoesService
 	{
-		private readonly string TopBoxOffice = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=chshuwu2c2pu5zhgsv8vrkgd&limit=1";
+		private readonly string TopBoxOffice = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=chshuwu2c2pu5zhgsv8vrkgd";
 
 		private readonly HttpClient _client;
-		private readonly JsonSerializer _serializer;
 
 		public RottenTomatoesService ()
 		{
 			_client = new HttpClient();
-			_serializer = new JsonSerializer ();
 		}
 
-		public void GetTopBoxOfficeAsync(Action<string> callback)
+		public void GetTopBoxOfficeAsync(Action<IList<Movie>> callback)
 		{
 			_client.GetAsync (TopBoxOffice).ContinueWith (requestTask => {
 				HttpResponseMessage responce = requestTask.Result;
@@ -27,10 +26,9 @@ namespace Logic
 				responce.Content.ReadAsStringAsync().ContinueWith(readTask => {
 					var strData = readTask.Result;
 
-					var ro = JsonConvert.DeserializeObject<RootObject>(strData);
-//					var ro = _serializer.Deserialize<RootObject>(new JsonReader());
+					RootObjectTopBoxOffice root = JsonConvert.DeserializeObject<RootObjectTopBoxOffice>(strData);
 
-					callback(strData);
+					callback(root.movies);
 				});
 			});
 		}

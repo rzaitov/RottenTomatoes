@@ -19,8 +19,8 @@ namespace RottenTomatoes
 			window.MakeKeyAndVisible ();
 
 			RottenTomatoesService service = new RottenTomatoesService ();
-			service.GetTopBoxOfficeAsync (str => {
-				Console.WriteLine(str);
+			service.GetTopBoxOfficeAsync (movies => {
+				Console.WriteLine(movies);
 			});
 
 

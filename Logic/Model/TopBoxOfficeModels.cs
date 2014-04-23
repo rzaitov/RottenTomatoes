@@ -69,7 +69,7 @@ namespace Logic
 		public string alternate { get; set; }
 	}
 
-	public class RootObject
+	public class RootObjectTopBoxOffice
 	{
 		public List<Movie> movies { get; set; }
 		public Links2 links { get; set; }
