@@ -7,6 +7,7 @@ namespace RottenTomatoes
 {
 	public class MovieCell : UITableViewCell
 	{
+		private const float LeftMargin = 5f;
 		private UILabel _movieTitle;
 		private UIImageView _thumbnail, _freshImg, _rottenImg;
 		private UILabel _criticScore, _actors, _mppaRuntime;
@@ -27,7 +28,8 @@ namespace RottenTomatoes
 			ContentView.AddSubview(_thumbnail);
 
 			_movieTitle = new UILabel {
-				TextColor = UIColor.Blue
+				TextColor = UIColor.Blue,
+				Font = Fonts.Bold14
 			};
 			ContentView.AddSubview(_movieTitle);
 
@@ -36,14 +38,20 @@ namespace RottenTomatoes
 			ContentView.AddSubviews(_freshImg, _rottenImg);
 			_freshImg.Hidden = _rottenImg.Hidden = true;
 
-			_criticScore = new UILabel();
-			ContentView.AddSubview(_criticScore);
+			_criticScore = InitInfoLabel();
+			_actors = InitInfoLabel();
+			_mppaRuntime = InitInfoLabel();
+		}
 
-			_actors = new UILabel();
-			ContentView.AddSubview(_actors);
+		private UILabel InitInfoLabel()
+		{
+			var lbl = new UILabel {
+				BackgroundColor = UIColor.Clear,
+				Font = Fonts.Regular14
+			};
+			ContentView.AddSubview(lbl);
 
-			_mppaRuntime = new UILabel();
-			ContentView.AddSubview(_mppaRuntime);
+			return lbl;
 		}
 
 		public void Bind(Movie movie)
@@ -70,10 +78,10 @@ namespace RottenTomatoes
 
 			_thumbnail.Begin().Size(new SizeF(61f, 91f)).Commit();
 
-			_movieTitle.Begin().AlignLeft(_thumbnail).FillRight().Commit();
-
-			_mppaRuntime.Begin().AlignRight().AlignBottom().Commit();
-
+			_movieTitle.Begin().PlaceRight(_thumbnail, LeftMargin).FillRight().Commit();
+			_actors.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_movieTitle).Commit();
+			_criticScore.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_actors).Commit();
+			_mppaRuntime.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_criticScore).Commit();
 		}
 	}
 }

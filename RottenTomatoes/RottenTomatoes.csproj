@@ -110,6 +110,7 @@
     <Compile Include="ImgPath.cs" />
     <Compile Include="Common\ImageInitializer.cs" />
     <Compile Include="Common\FrameContext.cs" />
+    <Compile Include="AppStyle\Fonts.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -124,5 +125,6 @@
     <Folder Include="Screens\MovieDetails\" />
     <Folder Include="Resources\Indicators\" />
     <Folder Include="Common\" />
+    <Folder Include="AppStyle\" />
   </ItemGroup>
 </Project>
