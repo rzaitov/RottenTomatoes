@@ -8,6 +8,7 @@ namespace RottenTomatoes
 	public class MovieCell : UITableViewCell
 	{
 		private const float LeftMargin = 5f;
+		private const float VerticalSpace = 2f;
 		private readonly SizeF ThumbSize = new SizeF(61f, 91f);
 
 		private UILabel _movieTitle;
@@ -39,7 +40,7 @@ namespace RottenTomatoes
 			_freshImg = ImageInitializer.InitImageView(ImgPath.Indicators.Fresh);
 			_rottenImg = ImageInitializer.InitImageView(ImgPath.Indicators.Rotten);
 			ContentView.AddSubviews(_freshImg, _rottenImg);
-			_freshImg.Hidden = _rottenImg.Hidden = true;
+//			_freshImg.Hidden = _rottenImg.Hidden = true;
 
 			_criticScore = InitInfoLabel();
 			_actors = InitInfoLabel();
@@ -59,6 +60,10 @@ namespace RottenTomatoes
 
 		public void Bind(Movie movie)
 		{
+			bool isFresh = movie.ratings.IsFresh;
+			_freshImg.Hidden = !isFresh;
+			_rottenImg.Hidden = isFresh;
+
 			_movieTitle.Text = movie.title;
 			_movieTitle.SizeToFit();
 
@@ -81,10 +86,14 @@ namespace RottenTomatoes
 
 			_thumbnail.Begin().Size(ThumbSize).Commit();
 
-			_movieTitle.Begin().PlaceRight(_thumbnail, LeftMargin).FillRight().Commit();
-			_actors.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_movieTitle).Commit();
-			_criticScore.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_actors).Commit();
-			_mppaRuntime.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_criticScore).Commit();
+			_movieTitle.Begin().Y(VerticalSpace).PlaceRight(_thumbnail, LeftMargin).FillRight().Commit();
+			_actors.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_movieTitle, VerticalSpace).Commit();
+
+			_freshImg.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_actors, VerticalSpace).Commit();
+			_rottenImg.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_actors, VerticalSpace).Commit();
+
+			_criticScore.Begin().PlaceRight(_freshImg, LeftMargin).PlaceBelow(_actors, VerticalSpace).Commit();
+			_mppaRuntime.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_criticScore, VerticalSpace).Commit();
 		}
 	}
 }

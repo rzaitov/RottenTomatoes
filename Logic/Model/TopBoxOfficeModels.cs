@@ -10,6 +10,11 @@ namespace Logic
 
 	public class Ratings
 	{
+		public bool IsFresh
+		{
+			get { return critics_rating.ToLower().Contains("fresh"); }
+		}
+
 		public string critics_rating { get; set; }
 		public int critics_score { get; set; }
 		public string audience_rating { get; set; }
