@@ -8,9 +8,12 @@ namespace RottenTomatoes
 	public class MovieCell : UITableViewCell
 	{
 		private const float LeftMargin = 5f;
+		private readonly SizeF ThumbSize = new SizeF(61f, 91f);
+
 		private UILabel _movieTitle;
 		private UIImageView _thumbnail, _freshImg, _rottenImg;
 		private UILabel _criticScore, _actors, _mppaRuntime;
+
 		private readonly RatingFormatter _ratingFormatter;
 		private readonly ActorsFormatter _actorsFormatter;
 		private readonly RuntimeFormatter _runtimeFormatter;
@@ -76,7 +79,7 @@ namespace RottenTomatoes
 		{
 			base.LayoutSubviews();
 
-			_thumbnail.Begin().Size(new SizeF(61f, 91f)).Commit();
+			_thumbnail.Begin().Size(ThumbSize).Commit();
 
 			_movieTitle.Begin().PlaceRight(_thumbnail, LeftMargin).FillRight().Commit();
 			_actors.Begin().PlaceRight(_thumbnail, LeftMargin).PlaceBelow(_movieTitle).Commit();
