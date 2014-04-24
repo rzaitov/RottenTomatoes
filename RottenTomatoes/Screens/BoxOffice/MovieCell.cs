@@ -1,11 +1,14 @@
 ﻿using System;
-using MonoTouch.UIKit;
-using Logic;
 using System.Drawing;
+
+using MonoTouch.UIKit;
+using MonoTouch.Dialog.Utilities;
+
+using Logic;
 
 namespace RottenTomatoes
 {
-	public class MovieCell : UITableViewCell
+	public class MovieCell : UITableViewCell, IImageUpdated
 	{
 		private const float LeftMargin = 5f;
 		private const float VerticalSpace = 2f;
@@ -18,6 +21,8 @@ namespace RottenTomatoes
 		private readonly RatingFormatter _ratingFormatter;
 		private readonly ActorsFormatter _actorsFormatter;
 		private readonly RuntimeFormatter _runtimeFormatter;
+
+		private Uri _imgUri;
 
 		public MovieCell(UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
@@ -77,7 +82,20 @@ namespace RottenTomatoes
 			_mppaRuntime.Text = string.Format("{0}, {1}", movie.mpaa_rating, runtime);
 			_mppaRuntime.SizeToFit();
 
+			_imgUri = new Uri(movie.posters.thumbnail);
+
+			UIImage img = ImageLoader.DefaultRequestImage(_imgUri, this);
+			_thumbnail.Image = img;
+
 			LayoutSubviews();
+		}
+
+		public void UpdatedImage(Uri uri)
+		{
+			if (_imgUri == uri) {
+				UIImage img = ImageLoader.DefaultRequestImage(uri, this);
+				_thumbnail.Image = img;
+			}
 		}
 
 		public override void LayoutSubviews()
