@@ -12,16 +12,24 @@ namespace RottenTomatoes
 	{
 		private const string ReuseId = "MovieCellReuseId";
 
-		public IList<Movie> Movies { get; set; }
+		public IList<Movie> TopBoxMovies { get; set; }
+		public IList<Movie> OpeningThisWeek { get; set; }
+		public IList<Movie> InTheater { get; set; }
 
 		public BoxOfficeSource ()
 		{
-			Movies = new Movie[]{ };
+			TopBoxMovies = OpeningThisWeek = InTheater = new Movie[]{ };
 		}
 
 		public override int RowsInSection (UITableView tableview, int section)
 		{
-			return Movies.Count;
+			var source = GetSourceForSection(section);
+			return source.Count;
+		}
+
+		public override int NumberOfSections(UITableView tableView)
+		{
+			return 3;
 		}
 
 		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
@@ -29,9 +37,48 @@ namespace RottenTomatoes
 			MovieCell cell = (MovieCell)tableView.DequeueReusableCell (ReuseId);
 			cell = cell ?? new MovieCell (UITableViewCellStyle.Default, ReuseId);
 
-			cell.Bind (Movies [indexPath.Row]);
+			var source = GetSourceForSection(indexPath.Section);
+			cell.Bind(source[indexPath.Row]);
 
 			return cell;
+		}
+
+		public override string TitleForHeader(UITableView tableView, int section)
+		{
+			SectionType type = (SectionType)section;
+
+			switch (type) {
+				case SectionType.OpeningThisWeek:
+					return "Opening This Week";
+
+				case SectionType.TopBoxOffice:
+					return "Top Box Office";
+
+				case SectionType.InTheaters:
+					return "Also In Theaters";
+
+				default:
+					throw new NotImplementedException();
+			}
+		}
+
+		private IList<Movie> GetSourceForSection(int section)
+		{
+			SectionType type = (SectionType)section;
+
+			switch (type) {
+				case SectionType.OpeningThisWeek:
+					return OpeningThisWeek;
+
+				case SectionType.TopBoxOffice:
+					return TopBoxMovies;
+
+				case SectionType.InTheaters:
+					return InTheater;
+
+				default:
+					throw new NotImplementedException();
+			}
 		}
 	}
 }

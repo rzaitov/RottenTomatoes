@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MonoTouch.UIKit;
 using Logic;
+using MonoTouch.Foundation;
 
 namespace RottenTomatoes
 {
@@ -22,10 +23,28 @@ namespace RottenTomatoes
 			AddSubview (_table);
 		}
 
-		public void ShowMovies(IList<Movie> movies)
+		public void ShowOpeningThisWeek(IList<Movie> movies)
 		{
-			_source.Movies = movies;
-			_table.ReloadData ();
+			_source.OpeningThisWeek = movies;
+			ReloadSection(SectionType.OpeningThisWeek);
+		}
+
+		public void ShowTopBoxOffice(IList<Movie> movies)
+		{
+			_source.TopBoxMovies = movies;
+			ReloadSection(SectionType.TopBoxOffice);
+		}
+
+		public void ShowInTheaters(IList<Movie> movies)
+		{
+			_source.InTheater = movies;
+			ReloadSection(SectionType.InTheaters);
+		}
+
+		private void ReloadSection(SectionType sectionType)
+		{
+//			_table.ReloadData();
+			_table.ReloadSections(new NSIndexSet((uint)sectionType), UITableViewRowAnimation.None);
 		}
 
 		public override void LayoutSubviews ()

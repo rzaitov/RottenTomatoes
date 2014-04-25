@@ -29,9 +29,22 @@ namespace RottenTomatoes
 
 			_service.GetOpeningThisWeek (movies => {
 				BeginInvokeOnMainThread (() => {
-					_view.ShowMovies (movies);
+					_view.ShowOpeningThisWeek (movies);
 				});
 			});
+
+			_service.GetTopBoxOfficeAsync (movies => {
+				BeginInvokeOnMainThread (() => {
+					_view.ShowTopBoxOffice (movies);
+				});
+			});
+
+			_service.GetInTheaters (movies => {
+				BeginInvokeOnMainThread (() => {
+					_view.ShowInTheaters (movies);
+				});
+			});
+
 		}
 	}
 }

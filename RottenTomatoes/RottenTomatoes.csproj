@@ -115,6 +115,7 @@
     <Compile Include="Common\ImageInitializer.cs" />
     <Compile Include="Common\FrameContext.cs" />
     <Compile Include="AppStyle\Fonts.cs" />
+    <Compile Include="Screens\BoxOffice\SectionType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
