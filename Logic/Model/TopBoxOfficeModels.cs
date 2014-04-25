@@ -6,13 +6,20 @@ namespace Logic
 	public class ReleaseDates
 	{
 		public string theater { get; set; }
+//		public string dvd { get; set; }
 	}
 
 	public class Ratings
 	{
 		public bool IsFresh
 		{
-			get { return critics_rating.ToLower().Contains("fresh"); }
+			get
+			{
+				if (string.IsNullOrWhiteSpace(critics_rating))
+					return false;
+
+				return critics_rating.ToLower().Contains("fresh");
+			}
 		}
 
 		public string critics_rating { get; set; }
@@ -57,7 +64,7 @@ namespace Logic
 		public string title { get; set; }
 		public int year { get; set; }
 		public string mpaa_rating { get; set; }
-		public int runtime { get; set; }
+		public int? runtime { get; set; }
 		public string critics_consensus { get; set; }
 		public ReleaseDates release_dates { get; set; }
 		public Ratings ratings { get; set; }
@@ -74,7 +81,7 @@ namespace Logic
 		public string alternate { get; set; }
 	}
 
-	public class RootObjectTopBoxOffice
+	public class MoviesRootObject
 	{
 		public List<Movie> movies { get; set; }
 		public Links2 links { get; set; }

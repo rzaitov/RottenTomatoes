@@ -27,7 +27,7 @@ namespace RottenTomatoes
 		{
 			base.ViewDidLoad ();
 
-			_service.GetTopBoxOfficeAsync (movies => {
+			_service.GetOpeningThisWeek (movies => {
 				BeginInvokeOnMainThread (() => {
 					_view.ShowMovies (movies);
 				});

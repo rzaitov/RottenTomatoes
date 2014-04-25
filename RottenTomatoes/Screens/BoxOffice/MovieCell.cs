@@ -20,7 +20,7 @@ namespace RottenTomatoes
 
 		private readonly RatingFormatter _ratingFormatter;
 		private readonly ActorsFormatter _actorsFormatter;
-		private readonly RuntimeFormatter _runtimeFormatter;
+		private readonly MpaaRuntimeFormatter _mpaaRuntimeFormatter;
 
 		private Uri _imgUri;
 
@@ -29,7 +29,7 @@ namespace RottenTomatoes
 		{
 			_ratingFormatter = new RatingFormatter();
 			_actorsFormatter = new ActorsFormatter();
-			_runtimeFormatter = new RuntimeFormatter();
+			_mpaaRuntimeFormatter = new MpaaRuntimeFormatter();
 
 			_thumbnail = new UIImageView {
 				BackgroundColor = UIColor.Gray
@@ -66,8 +66,9 @@ namespace RottenTomatoes
 		public void Bind(Movie movie)
 		{
 			bool isFresh = movie.ratings.IsFresh;
-			_freshImg.Hidden = !isFresh;
-			_rottenImg.Hidden = isFresh;
+			bool indicatorExists = !string.IsNullOrWhiteSpace(movie.ratings.critics_rating);
+			_freshImg.Hidden = !isFresh || !indicatorExists;
+			_rottenImg.Hidden = isFresh || !indicatorExists;
 
 			_movieTitle.Text = movie.title;
 			_movieTitle.SizeToFit();
@@ -78,8 +79,7 @@ namespace RottenTomatoes
 			_actors.Text = _actorsFormatter.Format(2, movie.abridged_cast);
 			_actors.SizeToFit();
 
-			string runtime = _runtimeFormatter.Format(movie.runtime);
-			_mppaRuntime.Text = string.Format("{0}, {1}", movie.mpaa_rating, runtime);
+			_mppaRuntime.Text = _mpaaRuntimeFormatter.Format(movie.mpaa_rating, movie.runtime);
 			_mppaRuntime.SizeToFit();
 
 			_imgUri = new Uri(movie.posters.thumbnail);

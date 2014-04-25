@@ -8,10 +8,13 @@ namespace Logic
 		{
 		}
 
-		public string Format(int minutes)
+		public string Format(int? minutes)
 		{
-			int hours = minutes / 60;
-			int mins = minutes % 60;
+			if (!minutes.HasValue)
+				return string.Empty;
+
+			int hours = minutes.Value / 60;
+			int mins = minutes.Value % 60;
 
 			string result = string.Format ("{0} hr. {1:00} min.", hours, mins);
 			return result;

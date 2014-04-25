@@ -39,6 +39,8 @@
     <Compile Include="Formatters\RatingFormatter.cs" />
     <Compile Include="Formatters\ActorsFormatter.cs" />
     <Compile Include="Formatters\RuntimeFormatter.cs" />
+    <Compile Include="Model\OpeningThisWeekModel.cs" />
+    <Compile Include="Formatters\MpaaRuntimeFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
