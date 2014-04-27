@@ -100,8 +100,8 @@
     <BundleResource Include="Resources\Indicators\user%402x.png" />
     <BundleResource Include="Resources\Indicators\freshSmall%402x.png" />
     <BundleResource Include="Resources\Indicators\rottenSmall%402x.png" />
-    <BundleResource Include="Resources\Indicators\freshBig%402x.png" />
-    <BundleResource Include="Resources\Indicators\rottenBig%402x.png" />
+    <BundleResource Include="Resources\Indicators\rottenBig.png" />
+    <BundleResource Include="Resources\Indicators\freshBig.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

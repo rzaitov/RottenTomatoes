@@ -80,7 +80,9 @@ namespace RottenTomatoes
 			_source = new ReviewSource();
 			_table = new UITableView {
 				Source = _source,
+				SeparatorInset = UIEdgeInsets.Zero
 			};
+//			_table.RowHeight = 70f;
 			AddSubview(_table);
 		}
 

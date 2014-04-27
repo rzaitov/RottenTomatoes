@@ -19,7 +19,7 @@ namespace RottenTomatoes
 			_criticPublication = new UILabel();
 			_criticPublication.Font = Fonts.Italic14;
 
-			_quote = new UILabel();
+			_quote = UIFactory.MultiLineLabel();
 			_quote.Font = Fonts.Regular14;
 
 			ContentView.AddSubviews(_criticPublication, _quote);
@@ -40,11 +40,11 @@ namespace RottenTomatoes
 		{
 			base.LayoutSubviews();
 
-			_freshIndicator.Begin().CenterV().Commit();
-			_rottenIndicator.Begin().CenterV().Commit();
+			_freshIndicator.Begin().CenterV().X(5f).Commit();
+			_rottenIndicator.Begin().CenterV().X(5f).Commit();
 
-			_criticPublication.Begin().PlaceRight(_freshIndicator).Commit().SizeToFit();
-			_quote.Begin().PlaceRight(_freshIndicator).PlaceBelow(_criticPublication).Commit().SizeToFit();
+			_criticPublication.Begin().PlaceRight(_freshIndicator, 5f).Commit().SizeToFit();
+			_quote.Begin().PlaceRight(_freshIndicator, 5f).PlaceBelow(_criticPublication).FillRight().Commit().SizeToFit();
 		}
 	}
 }
