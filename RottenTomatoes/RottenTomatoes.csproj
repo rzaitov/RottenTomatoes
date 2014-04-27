@@ -117,6 +117,8 @@
     <Compile Include="Screens\BoxOffice\SectionType.cs" />
     <Compile Include="AppCommon\Fonts.cs" />
     <Compile Include="AppCommon\Strings.cs" />
+    <Compile Include="Screens\MovieDetails\MovieDetailsView.cs" />
+    <Compile Include="Screens\MovieDetails\MovieDetailsViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
