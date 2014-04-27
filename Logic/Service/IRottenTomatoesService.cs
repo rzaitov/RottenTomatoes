@@ -12,6 +12,8 @@ namespace Logic
 		void GetInTheatersAsync(Action<IList<Movie>> callback);
 
 		void GetMovieDetails(string movieId, Action<MovieDetails> callback);
+
+		void GetMovieReviews(string movieId, Action<IList<Review>> callback);
 	}
 }
 

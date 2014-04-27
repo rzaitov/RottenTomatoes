@@ -6,8 +6,12 @@ namespace RottenTomatoes
 	{
 		public static class Indicators
 		{
-			public const string Fresh = "Indicators/fresh.png";
-			public const string Rotten = "Indicators/rotten.png";
+			public const string FreshSmall = "Indicators/freshSmall.png";
+			public const string RottenSmall = "Indicators/freshSmall.png";
+
+			public const string FreshBig = "Indicators/freshBig.png";
+			public const string RottenBig = "Indicators/freshBig.png";
+
 			public const string User = "Indicators/user.png";
 		}
 	}

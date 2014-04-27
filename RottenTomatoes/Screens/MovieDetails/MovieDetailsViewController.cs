@@ -29,6 +29,9 @@ namespace RottenTomatoes
 
 			_service.GetMovieDetails("771362204", movieDetails =>
 				InvokeOnMainThread(() => _view.BindMovieDetails(movieDetails)));
+
+			_service.GetMovieReviews("771362204", reviews =>
+				InvokeOnMainThread(() => _view.BindCriticsReviews(reviews)));
 		}
 	}
 }

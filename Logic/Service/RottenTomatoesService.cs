@@ -16,6 +16,7 @@ namespace Logic
 		private readonly string InTheatersResource =      "/api/public/v1.0/lists/movies/in_theaters.json";
 
 		private readonly string MovieDetailsResourcePattern = "/api/public/v1.0/movies/{0}.json";
+		private readonly string MovieReviesResourcePattern = "/api/public/v1.0/movies/{0}/reviews.json";
 
 		private readonly string KeyQuery;
 
@@ -51,6 +52,13 @@ namespace Logic
 			string resource = string.Format(MovieDetailsResourcePattern, movieId);
 			Uri movieDetailsUri = CreateForResource(resource);
 			ExecuteAsync<MovieDetails>(movieDetailsUri, callback);
+		}
+
+		public void GetMovieReviews(string movieId, Action<IList<Review>> callback)
+		{
+			string resource = string.Format(MovieReviesResourcePattern, movieId);
+			Uri movieReviewsUri = CreateForResource(resource);
+			ExecuteAsync<CriticsRootObject>(movieReviewsUri, cro => callback(cro.reviews));
 		}
 
 		private Uri CreateForResource(string resource)

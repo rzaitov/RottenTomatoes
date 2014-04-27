@@ -40,8 +40,8 @@ namespace RottenTomatoes
 			};
 			ContentView.AddSubview(_movieTitle);
 
-			_freshImg = ImageInitializer.InitImageView(ImgPath.Indicators.Fresh);
-			_rottenImg = ImageInitializer.InitImageView(ImgPath.Indicators.Rotten);
+			_freshImg = ImageInitializer.InitImageView(ImgPath.Indicators.FreshSmall);
+			_rottenImg = ImageInitializer.InitImageView(ImgPath.Indicators.RottenSmall);
 			ContentView.AddSubviews(_freshImg, _rottenImg);
 //			_freshImg.Hidden = _rottenImg.Hidden = true;
 

@@ -31,6 +31,9 @@ namespace RottenTomatoes
 		private UILabel _genre;
 		private UILabel _release;
 
+		private UITableView _table;
+		private ReviewSource _source;
+
 		private Uri _posterUri;
 
 		public MovieDetailsView()
@@ -59,20 +62,26 @@ namespace RottenTomatoes
 				(_genre = UIFactory.MultiLineLabel()),
 				(_release = UIFactory.MultiLineLabel())
 			};
-			AddSubview(_container);
+//			AddSubview(_container);
 
 			_title.Font = Fonts.Bold14;
 			_title.BackgroundColor = UIColor.Red;
 			_title.TextColor = UIColor.White;
 
-			ImageInitializer.InitImageView(ImgPath.Indicators.Fresh, _fresIndicator);
-			ImageInitializer.InitImageView(ImgPath.Indicators.Rotten, _rottenIndicator);
+			ImageInitializer.InitImageView(ImgPath.Indicators.FreshSmall, _fresIndicator);
+			ImageInitializer.InitImageView(ImgPath.Indicators.RottenSmall, _rottenIndicator);
 			ImageInitializer.InitImageView(ImgPath.Indicators.User, _usersIndicator);
 
 			_topReleaseDate.Font = Fonts.Regular14;
 			_mppaRuntime.Font = Fonts.Regular14;
 			_criticsScore.Font = Fonts.Regular14;
 			_usersScore.Font = Fonts.Regular14;
+
+			_source = new ReviewSource();
+			_table = new UITableView {
+				Source = _source,
+			};
+			AddSubview(_table);
 		}
 
 		public void BindMovieDetails(MovieDetails movie)
@@ -119,7 +128,8 @@ namespace RottenTomatoes
 
 		public void BindCriticsReviews(IList<Review> reviews)
 		{
-
+			_source.Reviews = reviews;
+			_table.ReloadData();
 		}
 
 		public void UpdatedImage(Uri uri)
@@ -148,6 +158,7 @@ namespace RottenTomatoes
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
+			/*
 			_container.Begin().Fill().Commit();
 
 			_title.SizeToFit();
@@ -175,6 +186,8 @@ namespace RottenTomatoes
 			AppendToStack(_release, _genre);
 
 			_container.ContentSize = new SizeF(320f, _release.Frame.Bottom);
+			*/
+			_table.Begin().Fill().Commit();
 		}
 
 		private void AppendToStack(UILabel label, UIView topView)
