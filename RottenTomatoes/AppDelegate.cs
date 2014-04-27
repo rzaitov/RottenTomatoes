@@ -13,19 +13,23 @@ namespace RottenTomatoes
 	{
 		private UIWindow _window;
 		private BoxOfficeViewController _boxOfficeViewController;
+		private MovieDetailsViewController _detailsViewController;
 
 		private IRottenTomatoesService _service;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			string rottenKey = NSBundle.MainBundle.ObjectForInfoDictionary("RottenTomatoesKey").ToString();
-//			_service = new RottenTomatoesService (rottenKey);
-			_service = new MockService();
+			_service = new RottenTomatoesService (rottenKey);
+//			_service = new MockService();
 
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 
 			_boxOfficeViewController = new BoxOfficeViewController (_service);
-			_window.RootViewController = _boxOfficeViewController;
+			_detailsViewController = new MovieDetailsViewController(_service);
+
+//			_window.RootViewController = _boxOfficeViewController;
+			_window.RootViewController = _detailsViewController;
 
 			_window.MakeKeyAndVisible ();
 

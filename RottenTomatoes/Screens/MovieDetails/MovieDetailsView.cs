@@ -29,8 +29,10 @@ namespace RottenTomatoes
 
 		public MovieDetailsView()
 		{
+			BackgroundColor = UIColor.White;
+
 			_container = new UIView {
-				(_title = new UILabel())
+				(_title = new UILabel()),
 				(_profilePoster = new UIImageView()),
 
 				(_fresIndicator = new UIImageView()),
@@ -51,6 +53,7 @@ namespace RottenTomatoes
 				(_genre = UIFactory.MultiLineLabel()),
 				(_release = UIFactory.MultiLineLabel())
 			};
+			AddSubview(_container);
 
 			_title.Font = Fonts.Bold14;
 			_title.BackgroundColor = UIColor.Red;
@@ -98,7 +101,7 @@ namespace RottenTomatoes
 			AttributedStringBuilder asb = new AttributedStringBuilder();
 			asb.Append(title, Fonts.Bold14, UIColor.Black);
 			asb.Append(" ", Fonts.Regular14, UIColor.Black);
-			asb.Append(value, Fonts.Regular14);
+			asb.Append(value, Fonts.Regular14, UIColor.Black);
 
 			label.AttributedText = asb.ToAttributedString();
 			label.SizeToFit();
