@@ -10,7 +10,7 @@ namespace RottenTomatoes
 			public const string RottenSmall = "Indicators/freshSmall.png";
 
 			public const string FreshBig = "Indicators/freshBig.png";
-			public const string RottenBig = "Indicators/freshBig.png";
+			public const string RottenBig = "Indicators/rottenBig.png";
 
 			public const string User = "Indicators/user.png";
 		}
