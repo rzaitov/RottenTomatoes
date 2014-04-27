@@ -27,7 +27,6 @@ namespace RottenTomatoes
 		private UILabel _genre;
 		private UILabel _release;
 
-
 		public MovieDetailsView()
 		{
 			_container = new UIView {
@@ -44,13 +43,13 @@ namespace RottenTomatoes
 				(_topReleaseDate = new UILabel()),
 				(_mppaRuntime = new UILabel()),
 
-				(_synopsis = new UILabel()),
-				(_cast = new UILabel()),
-				(_director = new UILabel()),
-				(_rated = new UILabel()),
-				(_runingTime = new UILabel()),
-				(_genre = new UILabel()),
-				(_release = new UILabel())
+				(_synopsis = UIFactory.MultiLineLabel()),
+				(_cast = UIFactory.MultiLineLabel()),
+				(_director = UIFactory.MultiLineLabel()),
+				(_rated = UIFactory.MultiLineLabel()),
+				(_runingTime = UIFactory.MultiLineLabel()),
+				(_genre = UIFactory.MultiLineLabel()),
+				(_release = UIFactory.MultiLineLabel())
 			};
 
 			_title.Font = Fonts.Bold14;
@@ -102,6 +101,7 @@ namespace RottenTomatoes
 			asb.Append(value, Fonts.Regular14);
 
 			label.AttributedText = asb.ToAttributedString();
+			label.SizeToFit();
 		}
 	}
 }

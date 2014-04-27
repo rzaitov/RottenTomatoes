@@ -121,6 +121,7 @@
     <Compile Include="Screens\MovieDetails\MovieDetailsView.cs" />
     <Compile Include="Screens\MovieDetails\MovieDetailsViewController.cs" />
     <Compile Include="Common\AttributedStringBuilder.cs" />
+    <Compile Include="AppCommon\UIFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
