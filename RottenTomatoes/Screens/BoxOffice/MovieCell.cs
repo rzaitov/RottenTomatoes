@@ -63,10 +63,8 @@ namespace RottenTomatoes
 
 		public void Bind(Movie movie)
 		{
-			bool isFresh = movie.ratings.IsFresh;
-			bool indicatorExists = !string.IsNullOrWhiteSpace(movie.ratings.critics_rating);
-			_freshImg.Hidden = !isFresh || !indicatorExists;
-			_rottenImg.Hidden = isFresh || !indicatorExists;
+			_freshImg.Hidden = !movie.ratings.IsFresh;
+			_rottenImg.Hidden = !movie.ratings.IsRotten;
 
 			_movieTitle.Text = movie.title;
 			_movieTitle.SizeToFit();

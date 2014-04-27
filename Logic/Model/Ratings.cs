@@ -15,6 +15,17 @@ namespace Logic
 			}
 		}
 
+		public bool IsRotten
+		{
+			get
+			{
+				if (string.IsNullOrWhiteSpace(critics_rating))
+					return false;
+
+				return critics_rating.ToLower().Contains("rotten");
+			}
+		}
+
 		public string critics_rating { get; set; }
 		public int critics_score { get; set; }
 		public string audience_rating { get; set; }

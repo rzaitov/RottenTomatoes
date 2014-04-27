@@ -81,6 +81,9 @@ namespace RottenTomatoes
 			UIImage img = ImageLoader.DefaultRequestImage(_posterUri, this);
 			_profilePoster.Image = img;
 
+			_fresIndicator.Hidden = !movie.ratings.IsFresh;
+			_rottenIndicator.Hidden = !movie.ratings.IsRotten;
+
 			_title.Text = movie.title;
 			_criticsScore.Text = GetScore(movie.ratings.critics_score, Strings.CriticsLiked);
 			_usersScore.Text = GetScore(movie.ratings.audience_score, Strings.UsersLiked);
