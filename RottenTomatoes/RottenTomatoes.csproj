@@ -24,6 +24,9 @@
     <MtouchLink>None</MtouchLink>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -90,9 +93,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\Indicators\fresh.png" />
+    <BundleResource Include="Resources\Indicators\rotten.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -101,6 +107,30 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Screens\BoxOffice\BoxOfficeViewController.cs" />
+    <Compile Include="Screens\BoxOffice\BoxOfficeView.cs" />
+    <Compile Include="Screens\BoxOffice\BoxOfficeSource.cs" />
+    <Compile Include="Screens\BoxOffice\MovieCell.cs" />
+    <Compile Include="ImgPath.cs" />
+    <Compile Include="Common\ImageInitializer.cs" />
+    <Compile Include="Common\FrameContext.cs" />
+    <Compile Include="Screens\BoxOffice\SectionType.cs" />
+    <Compile Include="AppCommon\Fonts.cs" />
+    <Compile Include="AppCommon\Strings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{4E70C764-8389-4D90-B2C0-924BE3EF0618}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Screens\" />
+    <Folder Include="Screens\BoxOffice\" />
+    <Folder Include="Screens\MovieDetails\" />
+    <Folder Include="Resources\Indicators\" />
+    <Folder Include="Common\" />
+    <Folder Include="AppCommon\" />
+  </ItemGroup>
 </Project>
