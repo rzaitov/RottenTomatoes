@@ -7,7 +7,7 @@ namespace Logic
 		public static string Format(string date)
 		{
 			DateTime dt = DateTime.Parse(date);
-			return dt.ToString("MMM dd, yy");
+			return dt.ToString("MMM dd, yyyy");
 		}
 	}
 }
