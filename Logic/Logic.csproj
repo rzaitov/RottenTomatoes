@@ -53,6 +53,9 @@
     <Compile Include="Model\Links2.cs" />
     <Compile Include="Model\Review.cs" />
     <Compile Include="Model\Roots\MoviesRootObject.cs" />
+    <Compile Include="Model\Roots\MovieRootObject.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Formatters\ReleaseDateFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

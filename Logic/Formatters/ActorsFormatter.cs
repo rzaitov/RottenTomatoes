@@ -6,16 +6,24 @@ namespace Logic
 {
 	public class ActorsFormatter
 	{
-		public ActorsFormatter ()
+		public string Format(int take, IEnumerable<Person> actors)
 		{
+			return JoinNames(actors, take);
 		}
 
-		public string Format(int take, IEnumerable<AbridgedCast> actors)
+		public string Format(IEnumerable<Person> actors)
 		{
-			IEnumerable<string> names = actors.Select (actor => actor.name).Take (take);
-			string result = string.Join (", ", names);
+			return JoinNames(actors, -1);
+		}
 
-			return result;
+		private string JoinNames(IEnumerable<Person> actors, int take)
+		{
+			IEnumerable<string> names = actors.Select(actor => actor.name);
+
+			if (take >= 0)
+				names = names.Take(take);
+
+			return string.Join (", ", names);
 		}
 	}
 }

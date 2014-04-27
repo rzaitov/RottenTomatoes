@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MonoTouch.UIKit;
 
 using Logic;
+using MonoTouch.Foundation;
 
 namespace RottenTomatoes
 {
@@ -22,8 +23,10 @@ namespace RottenTomatoes
 		private UILabel _cast;
 		private UILabel _director;
 		private UILabel _rated;
+		private UILabel _runingTime;
 		private UILabel _genre;
 		private UILabel _release;
+
 
 		public MovieDetailsView()
 		{
@@ -45,6 +48,7 @@ namespace RottenTomatoes
 				(_cast = new UILabel()),
 				(_director = new UILabel()),
 				(_rated = new UILabel()),
+				(_runingTime = new UILabel()),
 				(_genre = new UILabel()),
 				(_release = new UILabel())
 			};
@@ -60,15 +64,44 @@ namespace RottenTomatoes
 			_mppaRuntime.Font = Fonts.Regular14;
 		}
 
-		public void BindMovieDetails(Movie movie)
+		public void BindMovieDetails(MovieRootObject movie)
 		{
+			SetTitleValueFor(_synopsis, Strings.Synopsis, movie.synopsis);
 
+			ActorsFormatter af = new ActorsFormatter();
+
+			string cast = af.Format(movie.abridged_cast);
+			SetTitleValueFor(_cast, Strings.Cast, cast);
+
+			string directors = af.Format(movie.abridged_directors);
+			SetTitleValueFor(_director, Strings.Director, directors);
+
+			SetTitleValueFor(_rated, Strings.Rated, movie.mpaa_rating);
+
+			var rf = new RuntimeFormatter();
+			string runtime = rf.Format(movie.runtime);
+			SetTitleValueFor(_runingTime, Strings.Runtime, runtime);
+
+			string genre = string.Join(", ", movie.genres);
+			SetTitleValueFor(_genre, Strings.Genre, genre);
+
+			string release = ReleaseDateFormatter.Format(movie.release_dates.theater);
+			SetTitleValueFor(_runingTime, Strings.Runtime, release);
 		}
 
 		public void BindCriticsReviews(IList<Review> reviews)
 		{
 
 		}
+
+		private void SetTitleValueFor(UILabel label, string title, string value)
+		{
+			AttributedStringBuilder asb = new AttributedStringBuilder();
+			asb.Append(title, Fonts.Bold14, UIColor.Black);
+			asb.Append(" ", Fonts.Regular14, UIColor.Black);
+			asb.Append(value, Fonts.Regular14);
+
+			label.AttributedText = asb.ToAttributedString();
+		}
 	}
 }
-
