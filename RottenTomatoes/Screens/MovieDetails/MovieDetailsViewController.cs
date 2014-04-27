@@ -9,6 +9,11 @@ namespace RottenTomatoes
 		public MovieDetailsViewController()
 		{
 		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
+		}
 	}
 }
 

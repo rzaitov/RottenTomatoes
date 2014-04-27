@@ -63,7 +63,7 @@ namespace RottenTomatoes
 			_mppaRuntime.Font = Fonts.Regular14;
 		}
 
-		public void BindMovieDetails(MovieRootObject movie)
+		public void BindMovieDetails(MovieDetails movie)
 		{
 			SetTitleValueFor(_synopsis, Strings.Synopsis, movie.synopsis);
 

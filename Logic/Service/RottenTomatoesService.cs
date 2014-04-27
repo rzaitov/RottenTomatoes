@@ -6,56 +6,51 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-	public class RottenTomatoesService : IRottenTomatoesService
+	public class RottenTomatoesService : Service, IRottenTomatoesService
 	{
 		private readonly string Key;
-		private readonly HttpClient _client;
-
 		private readonly Uri BaseUri = new Uri("http://api.rottentomatoes.com");
-		private readonly string TopBoxOfficeResource = "/api/public/v1.0/lists/movies/box_office.json";
+
+		private readonly string TopBoxOfficeResource =    "/api/public/v1.0/lists/movies/box_office.json";
 		private readonly string OpeningThisWeekResource = "/api/public/v1.0/lists/movies/opening.json";
-		private readonly string InTheatersResource = "/api/public/v1.0/lists/movies/in_theaters.json";
+		private readonly string InTheatersResource =      "/api/public/v1.0/lists/movies/in_theaters.json";
+
+		private readonly string MovieDetailsResourcePattern = "/api/public/v1.0/movies/{0}.json";
+
 		private readonly string KeyQuery;
 
 		public RottenTomatoesService (string key)
 		{
 			Key = key;
 			KeyQuery = string.Format("apikey={0}", Key);
-
-			_client = new HttpClient();
 		}
 
 		public void GetTopBoxOfficeAsync(Action<IList<Movie>> callback)
 		{
-			RequestMovies(TopBoxOfficeResource, callback);
+			RequestMoviesList(TopBoxOfficeResource, callback);
 		}
 
 		public void GetOpeningThisWeekAsync(Action<IList<Movie>> callback)
 		{
-			RequestMovies(OpeningThisWeekResource, callback);
+			RequestMoviesList(OpeningThisWeekResource, callback);
 		}
 
 		public void GetInTheatersAsync(Action<IList<Movie>> callback)
 		{
-			RequestMovies(InTheatersResource, callback);
+			RequestMoviesList(InTheatersResource, callback);
 		}
 
-		private void RequestMovies(string resource, Action<IList<Movie>> callback)
+		private void RequestMoviesList(string resource, Action<IList<Movie>> callback)
 		{
 			Uri uri = CreateForResource(resource);
+			ExecuteAsync<MoviesRootObject>(uri, root => callback(root.movies));
+		}
 
-			_client.GetAsync (uri).ContinueWith (requestTask => {
-				HttpResponseMessage responce = requestTask.Result;
-				responce.EnsureSuccessStatusCode();
-
-				responce.Content.ReadAsStringAsync().ContinueWith(readTask => {
-					var strData = readTask.Result;
-
-					MoviesRootObject root = JsonConvert.DeserializeObject<MoviesRootObject>(strData);
-
-					callback(root.movies);
-				});
-			});
+		public void GetMovieDetails(string movieId, Action<MovieDetails> callback)
+		{
+			string resource = string.Format(MovieDetailsResourcePattern, movieId);
+			Uri movieDetailsUri = CreateForResource(resource);
+			ExecuteAsync<MovieDetails>(movieDetailsUri, callback);
 		}
 
 		private Uri CreateForResource(string resource)

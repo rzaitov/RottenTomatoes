@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-	public class MovieRootObject
+	public class MovieDetails
 	{
 		public int id { get; set; }
 		public string title { get; set; }
