@@ -49,13 +49,13 @@ namespace RottenTomatoes
 
 			switch (type) {
 				case SectionType.OpeningThisWeek:
-					return "Opening This Week";
+					return Strings.OpeningThisWeek;
 
 				case SectionType.TopBoxOffice:
-					return "Top Box Office";
+					return Strings.TopBoxOffice;
 
 				case SectionType.InTheaters:
-					return "Also In Theaters";
+					return Strings.AlsoInTheaters;
 
 				default:
 					throw new NotImplementedException();
