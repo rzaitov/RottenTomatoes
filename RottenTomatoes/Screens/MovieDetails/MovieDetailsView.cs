@@ -12,6 +12,8 @@ namespace RottenTomatoes
 {
 	public class MovieDetailsView : UIView, IImageUpdated
 	{
+		private const float space = 5f;
+
 		private UILabel _title;
 		private UIImageView _profilePoster;
 
@@ -61,6 +63,7 @@ namespace RottenTomatoes
 
 			_title.Font = Fonts.Bold14;
 			_title.BackgroundColor = UIColor.Red;
+			_title.TextColor = UIColor.White;
 
 			ImageInitializer.InitImageView(ImgPath.Indicators.Fresh, _fresIndicator);
 			ImageInitializer.InitImageView(ImgPath.Indicators.Rotten, _rottenIndicator);
@@ -68,6 +71,8 @@ namespace RottenTomatoes
 
 			_topReleaseDate.Font = Fonts.Regular14;
 			_mppaRuntime.Font = Fonts.Regular14;
+			_criticsScore.Font = Fonts.Regular14;
+			_usersScore.Font = Fonts.Regular14;
 		}
 
 		public void BindMovieDetails(MovieDetails movie)
@@ -77,7 +82,13 @@ namespace RottenTomatoes
 			_profilePoster.Image = img;
 
 			_title.Text = movie.title;
-			_title.SizeToFit();
+			_criticsScore.Text = GetScore(movie.ratings.critics_score, Strings.CriticsLiked);
+			_usersScore.Text = GetScore(movie.ratings.audience_score, Strings.UsersLiked);
+
+			var release = ReleaseDateFormatter.Format(movie.release_dates.theater);
+			_topReleaseDate.Text = string.Format("{0} {1}", Strings.InTheaters, release);
+
+			_mppaRuntime.Text = MpaaRuntimeFormatter.Format(movie.mpaa_rating, movie.runtime);
 
 			SetTitleValueFor(_synopsis, Strings.Synopsis, movie.synopsis);
 
@@ -98,7 +109,6 @@ namespace RottenTomatoes
 			string genre = string.Join(", ", movie.genres);
 			SetTitleValueFor(_genre, Strings.Genre, genre);
 
-			string release = ReleaseDateFormatter.Format(movie.release_dates.theater);
 			SetTitleValueFor(_release, Strings.TheaterRelease, release);
 
 			LayoutSubviews();
@@ -117,6 +127,11 @@ namespace RottenTomatoes
 			}
 		}
 
+		private string GetScore(int percent, string likedpostfix)
+		{
+			return string.Format("{0}% {1}", percent, likedpostfix);
+		}
+
 		private void SetTitleValueFor(UILabel label, string title, string value)
 		{
 			AttributedStringBuilder asb = new AttributedStringBuilder();
@@ -132,21 +147,21 @@ namespace RottenTomatoes
 			base.LayoutSubviews();
 			_container.Begin().Fill().Commit();
 
+			_title.SizeToFit();
 			_title.Begin().FillHorizontally().Commit();
 			_profilePoster.Begin().Size(120f, 178f).PlaceBelow(_title).Commit();
 
-			_fresIndicator.Begin().PlaceRight(_profilePoster).PlaceBelow(_title).Commit();
-			_rottenIndicator.Begin().PlaceRight(_profilePoster).PlaceBelow(_title).Commit();
-			_criticsScore.Begin().PlaceRight(_fresIndicator).PlaceBelow(_title).Commit();
+			_fresIndicator.Begin().PlaceRight(_profilePoster, space).PlaceBelow(_title).Commit();
+			_rottenIndicator.Begin().PlaceRight(_profilePoster, space).PlaceBelow(_title).Commit();
+			_criticsScore.Begin().PlaceRight(_fresIndicator, space).PlaceBelow(_title).Commit().SizeToFit();
 
-			_usersIndicator.Begin().PlaceRight(_profilePoster).PlaceBelow(_criticsScore).Commit();
-			_usersScore.Begin().PlaceRight(_usersIndicator).PlaceBelow(_criticsScore).Commit();
+			_usersIndicator.Begin().PlaceRight(_profilePoster, space).PlaceBelow(_criticsScore).Commit();
+			_usersScore.Begin().PlaceRight(_usersIndicator, space).PlaceBelow(_criticsScore).Commit().SizeToFit();
 
-			_topReleaseDate.Begin().PlaceRight(_profilePoster).PlaceBelow(_usersScore).Commit();
-			_mppaRuntime.Begin().PlaceRight(_profilePoster).PlaceBelow(_topReleaseDate).Commit();
+			_topReleaseDate.Begin().PlaceRight(_profilePoster, space).PlaceBelow(_usersScore).Commit().SizeToFit();
+			_mppaRuntime.Begin().PlaceRight(_profilePoster, space).PlaceBelow(_topReleaseDate).Commit().SizeToFit();
 
-			_synopsis.Begin().PlaceBelow(_profilePoster).FillHorizontally().Commit();
-			_synopsis.SizeToFit();
+			_synopsis.Begin().PlaceBelow(_profilePoster).FillHorizontally().Commit().SizeToFit();
 
 			AppendToStack(_synopsis, _profilePoster);
 			AppendToStack(_cast, _synopsis);

@@ -20,7 +20,6 @@ namespace RottenTomatoes
 
 		private readonly RatingFormatter _ratingFormatter;
 		private readonly ActorsFormatter _actorsFormatter;
-		private readonly MpaaRuntimeFormatter _mpaaRuntimeFormatter;
 
 		private Uri _imgUri;
 
@@ -29,7 +28,6 @@ namespace RottenTomatoes
 		{
 			_ratingFormatter = new RatingFormatter();
 			_actorsFormatter = new ActorsFormatter();
-			_mpaaRuntimeFormatter = new MpaaRuntimeFormatter();
 
 			_thumbnail = new UIImageView {
 				BackgroundColor = UIColor.Gray
@@ -79,7 +77,7 @@ namespace RottenTomatoes
 			_actors.Text = _actorsFormatter.Format(2, movie.abridged_cast);
 			_actors.SizeToFit();
 
-			_mppaRuntime.Text = _mpaaRuntimeFormatter.Format(movie.mpaa_rating, movie.runtime);
+			_mppaRuntime.Text = MpaaRuntimeFormatter.Format(movie.mpaa_rating, movie.runtime);
 			_mppaRuntime.SizeToFit();
 
 			_imgUri = new Uri(movie.posters.thumbnail);

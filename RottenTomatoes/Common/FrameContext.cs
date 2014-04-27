@@ -8,15 +8,15 @@ using Logic;
 
 namespace RottenTomatoes
 {
-	public class FrameContext
+	public class FrameContext<T> where T : UIView
 	{
-		private UIView View { get; set; }
+		private T View { get; set; }
 		public RectangleF Frame;
 
 		public RectangleF? ParentBounds;
 		public RectangleF? RelativeFrame;
 
-		public FrameContext(UIView view, UIView relativeView)
+		public FrameContext(T view, UIView relativeView)
 		{
 			View = view;
 			Frame = View.Frame;
@@ -27,9 +27,10 @@ namespace RottenTomatoes
 			RelativeFrame = relativeView != null ? relativeView.Frame : (RectangleF?)null;
 		}
 
-		public void Commit()
+		public T Commit()
 		{
 			View.Frame = Frame;
+			return View;
 		}
 	}
 
@@ -38,27 +39,20 @@ namespace RottenTomatoes
 		/// <summary>
 		/// Get FrameContext
 		/// </summary>
-		public static FrameContext Begin(this UIView view, UIView relativeView = null)
+		public static FrameContext<T> Begin<T>(this T view, UIView relativeView = null) where T : UIView
 		{
-			FrameContext fc = new FrameContext(view, relativeView);
+			FrameContext<T> fc = new FrameContext<T>(view, relativeView);
 			return fc;
 		}
 
-		public static FrameContext Begin(this UIView view, UIView parentView, UIView relativeView = null)
+		public static FrameContext<T> Begin<T>(this T view, UIView parentView, UIView relativeView = null)  where T : UIView
 		{
-			FrameContext fc = new FrameContext(view, relativeView);
+			FrameContext<T> fc = new FrameContext<T>(view, relativeView);
 			return fc;
-		}
-
-		public static void Apply(this UIView view, Action<FrameContext> transformation)
-		{
-			var fc = view.Begin();
-			transformation(fc);
-			fc.Commit();
 		}
 
 		#region Coordinates and dimensions
-		public static FrameContext X(this FrameContext fc, float x)
+		public static FrameContext<T> X<T>(this FrameContext<T> fc, float x) where T : UIView
 		{
 			fc.Frame.X = x;
 			return fc;
@@ -69,31 +63,31 @@ namespace RottenTomatoes
 			view.Begin().X(x).Commit();
 		}
 
-		public static FrameContext Y(this FrameContext fc, float y)
+		public static FrameContext<T> Y<T>(this FrameContext<T> fc, float y) where T : UIView
 		{
 			fc.Frame.Y = y;
 			return fc;
 		}
 
-		public static FrameContext Width(this FrameContext fc, float width)
+		public static FrameContext<T> Width<T>(this FrameContext<T> fc, float width) where T : UIView
 		{
 			fc.Frame.Width = width;
 			return fc;
 		}
 
-		public static FrameContext Height(this FrameContext fc, float height)
+		public static FrameContext<T> Height<T>(this FrameContext<T> fc, float height) where T : UIView
 		{
 			fc.Frame.Height = height;
 			return fc;
 		}
 
-		public static FrameContext Size(this FrameContext fc, SizeF size)
+		public static FrameContext<T> Size<T>(this FrameContext<T> fc, SizeF size) where T : UIView
 		{
 			fc.Frame.Size = size;
 			return fc;
 		}
 
-		public static FrameContext Size(this FrameContext fc, float width, float height)
+		public static FrameContext<T> Size<T>(this FrameContext<T> fc, float width, float height) where T : UIView
 		{
 			return fc.Size(new SizeF(width, height));
 		}
@@ -101,53 +95,53 @@ namespace RottenTomatoes
 		#endregion
 
 		#region Alignment
-		public static FrameContext AlignLeft(this FrameContext fc, float dx = 0f)
+		public static FrameContext<T> AlignLeft<T>(this FrameContext<T> fc, float dx = 0f) where T : UIView
 		{
 			fc.Frame.X = dx;
 			return fc;
 		}
 
-		public static FrameContext AlignLeft(this FrameContext fc, UIView relativeView, float dx = 0f)
+		public static FrameContext<T> AlignLeft<T>(this FrameContext<T> fc, UIView relativeView, float dx = 0f) where T : UIView
 		{
 			fc.Frame.X = relativeView.Frame.X + dx;
 			return fc;
 		}
 
-		public static FrameContext AlignTop(this FrameContext fc, float topMargin = 0f)
+		public static FrameContext<T> AlignTop<T>(this FrameContext<T> fc, float topMargin = 0f) where T : UIView
 		{
 			fc.Frame.Y = topMargin;
 			return fc;
 		}
 
-		public static FrameContext AlignTop(this FrameContext fc, UIView relativeView, float topMargin = 0f)
+		public static FrameContext<T> AlignTop<T>(this FrameContext<T> fc, UIView relativeView, float topMargin = 0f) where T : UIView
 		{
 			return fc.AlignTop(relativeView.Frame, topMargin);
 		}
 
-		public static FrameContext AlignTop(this FrameContext fc, RectangleF relativeViewFrame, float topMargin = 0f)
+		public static FrameContext<T> AlignTop<T>(this FrameContext<T> fc, RectangleF relativeViewFrame, float topMargin = 0f) where T : UIView
 		{
 			fc.Frame.Y = relativeViewFrame.Y + topMargin;
 			return fc;
 		}
 
-		public static FrameContext AlignRight(this FrameContext fc, float rightMargin = 0f)
+		public static FrameContext<T> AlignRight<T>(this FrameContext<T> fc, float rightMargin = 0f) where T : UIView
 		{
 			fc.Frame.X = fc.ParentBounds.Value.Width - fc.Frame.Width - rightMargin;
 			return fc;
 		}
 
-		public static FrameContext AlignRight(this FrameContext fc, UIView relativeView, float rightMargin = 0f)
+		public static FrameContext<T> AlignRight<T>(this FrameContext<T> fc, UIView relativeView, float rightMargin = 0f) where T : UIView
 		{
 			fc.Frame.X = relativeView.Frame.Right - fc.Frame.Width - rightMargin;
 			return fc;
 		}
 
-		public static FrameContext AlignBottom(this FrameContext fc, float bottomMargin = 0f)
+		public static FrameContext<T> AlignBottom<T>(this FrameContext<T> fc, float bottomMargin = 0f) where T : UIView
 		{
 			return fc.BMargin(bottomMargin);
 		}
 
-		public static FrameContext AlignBottom(this FrameContext fc, UIView relativeView, float bottomMargin = 0f)
+		public static FrameContext<T> AlignBottom<T>(this FrameContext<T> fc, UIView relativeView, float bottomMargin = 0f) where T : UIView
 		{
 			fc.Frame.Y = relativeView.Frame.Bottom - fc.Frame.Height - bottomMargin;
 			return fc;
@@ -155,25 +149,25 @@ namespace RottenTomatoes
 		#endregion
 
 		#region Margin
-		public static FrameContext RMargin(this FrameContext fc, float rightMargin)
+		public static FrameContext<T> RMargin<T>(this FrameContext<T> fc, float rightMargin) where T : UIView
 		{
 			fc.Frame.Width = fc.ParentBounds.Value.Right - fc.Frame.X - rightMargin;
 			return fc;
 		}
 
-		public static FrameContext BMargin(this FrameContext fc, float bottomMargin)
+		public static FrameContext<T> BMargin<T>(this FrameContext<T> fc, float bottomMargin) where T : UIView
 		{
 			fc.Frame.Y = fc.ParentBounds.Value.Height - fc.Frame.Height - bottomMargin;
 			return fc;
 		}
 
-		public static FrameContext LMargin(this FrameContext fc, float leftMargin)
+		public static FrameContext<T> LMargin<T>(this FrameContext<T> fc, float leftMargin) where T : UIView
 		{
 			fc.Frame.X = leftMargin;
 			return fc;
 		}
 
-		public static FrameContext TMagrin(this FrameContext fc, float topMargin)
+		public static FrameContext<T> TMagrin<T>(this FrameContext<T> fc, float topMargin) where T : UIView
 		{
 			fc.Frame.Y = topMargin;
 			return fc;
@@ -181,30 +175,30 @@ namespace RottenTomatoes
 		#endregion
 
 		#region Placement
-		public static FrameContext PlaceAbove(this FrameContext fc, UIView viewBelow, float dy = 0f)
+		public static FrameContext<T> PlaceAbove<T>(this FrameContext<T> fc, UIView viewBelow, float dy = 0f) where T : UIView
 		{
 			fc.Frame.Y = viewBelow.Frame.Y - fc.Frame.Height + dy;
 			return fc;
 		}
 
-		public static void PlaceAbove(this UIView view, UIView viewBelow, float dy = 0f)
+		public static void PlaceAbove<T>(this UIView view, UIView viewBelow, float dy = 0f)
 		{
 			view.Begin().PlaceAbove(viewBelow, dy).Commit();
 		}
 
-		public static FrameContext PlaceBelow(this FrameContext fc, float dy = 0f)
+		public static FrameContext<T> PlaceBelow<T>(this FrameContext<T> fc, float dy = 0f) where T : UIView
 		{
 			fc.Frame.Y = fc.ParentBounds.Value.Height + dy;
 			return fc;
 		}
 
-		public static FrameContext PlaceBelow(this FrameContext fc, UIView viewAbove, float dy = 0f)
+		public static FrameContext<T> PlaceBelow<T>(this FrameContext<T> fc, UIView viewAbove, float dy = 0f) where T : UIView
 		{
 			fc.Frame.Y = viewAbove.Frame.Bottom + dy;
 			return fc;
 		}
 
-		public static FrameContext PlaceRight(this FrameContext fc, UIView pivot, float dx = 0f)
+		public static FrameContext<T> PlaceRight<T>(this FrameContext<T> fc, UIView pivot, float dx = 0f) where T : UIView
 		{
 			fc.Frame.X = pivot.Frame.Right + dx;
 			return fc;
@@ -215,7 +209,7 @@ namespace RottenTomatoes
 			view.Begin().PlaceRight(pivot).Commit();
 		}
 
-		public static FrameContext PlaceLeft(this FrameContext fc, UIView pivot, float dx = 0f)
+		public static FrameContext<T> PlaceLeft<T>(this FrameContext<T> fc, UIView pivot, float dx = 0f) where T : UIView
 		{
 			fc.Frame.X = pivot.Frame.X - fc.Frame.Width + dx;
 			return fc;
@@ -226,7 +220,7 @@ namespace RottenTomatoes
 			view.Begin().PlaceLeft(pivot, dx).Commit();
 		}
 
-		public static FrameContext CenterH(this FrameContext fc)
+		public static FrameContext<T> CenterH<T>(this FrameContext<T> fc) where T : UIView
 		{
 			fc.Frame.X = (fc.ParentBounds.Value.Width - fc.Frame.Width) / 2;
 			return fc;
@@ -243,7 +237,7 @@ namespace RottenTomatoes
 				v.CenterH();
 		}
 
-		public static FrameContext CenterV(this FrameContext fc)
+		public static FrameContext<T> CenterV<T>(this FrameContext<T> fc) where T : UIView
 		{
 			fc.Frame.Y = (fc.ParentBounds.Value.Height - fc.Frame.Height) / 2;
 			return fc;
@@ -254,14 +248,14 @@ namespace RottenTomatoes
 			view.Begin().CenterV().Commit();
 		}
 
-		public static FrameContext Center(this FrameContext fc)
+		public static FrameContext<T> Center<T>(this FrameContext<T> fc) where T : UIView
 		{
 			fc.CenterH();
 			fc.CenterV();
 			return fc;
 		}
 
-		public static FrameContext Location(this FrameContext fc, PointF location)
+		public static FrameContext<T> Location<T>(this FrameContext<T> fc, PointF location) where T : UIView
 		{
 			fc.Frame.Location = location;
 			return fc;
@@ -270,7 +264,7 @@ namespace RottenTomatoes
 		/// <summary>
 		/// Расплолагает view правее центра родителя. Есть возможность сдвига на dx
 		/// </summary>
-		public static FrameContext RightOfCenter(this FrameContext fc, float dx = 0f)
+		public static FrameContext<T> RightOfCenter<T>(this FrameContext<T> fc, float dx = 0f) where T : UIView
 		{
 			fc.Frame.X = fc.ParentBounds.Value.Width / 2 + dx;
 			return fc;
@@ -278,7 +272,7 @@ namespace RottenTomatoes
 		#endregion
 
 		#region Filling
-		public static FrameContext FillHorizontally(this FrameContext fc, float left = 0f, float right = 0f)
+		public static FrameContext<T> FillHorizontally<T>(this FrameContext<T> fc, float left = 0f, float right = 0f) where T : UIView
 		{
 			fc.Frame.X = left;
 			fc.Frame.Width = fc.ParentBounds.Value.Width - left - right;
@@ -290,14 +284,14 @@ namespace RottenTomatoes
 			view.Begin().FillHorizontally(left, right).Commit();
 		}
 
-		public static FrameContext FillVertically(this FrameContext fc, float top = 0f, float bottom = 0f)
+		public static FrameContext<T> FillVertically<T>(this FrameContext<T> fc, float top = 0f, float bottom = 0f) where T : UIView
 		{
 			fc.Frame.Y = top;
 			fc.Height(fc.ParentBounds.Value.Height - top - bottom);
 			return fc;
 		}
 
-		public static FrameContext FillBelow(this FrameContext fc, float bottomMargin = 0f)
+		public static FrameContext<T> FillBelow<T>(this FrameContext<T> fc, float bottomMargin = 0f) where T : UIView
 		{
 			float height = fc.ParentBounds.Value.Height - fc.Frame.Top - bottomMargin;
 			Assert.True(height >= 0f);
@@ -306,7 +300,7 @@ namespace RottenTomatoes
 			return fc;
 		}
 
-		public static FrameContext FillBelowUntil(this FrameContext fc, UIView stopView, float bottomMargin = 0f)
+		public static FrameContext<T> FillBelowUntil<T>(this FrameContext<T> fc, UIView stopView, float bottomMargin = 0f) where T : UIView
 		{
 			float height = stopView.Frame.Top - fc.Frame.Top - bottomMargin;
 			Assert.True(height >= 0f);
@@ -318,7 +312,7 @@ namespace RottenTomatoes
 		/// <summary>
 		/// Fill parent view
 		/// </summary>
-		public static FrameContext Fill(this FrameContext fc, float left = 0f, float top = 0f, float right = 0f, float bottom = 0f)
+		public static FrameContext<T> Fill<T>(this FrameContext<T> fc, float left = 0f, float top = 0f, float right = 0f, float bottom = 0f) where T : UIView
 		{
 			fc.Frame = fc.ParentBounds.Value;
 			fc.Frame.X += left;
@@ -332,7 +326,7 @@ namespace RottenTomatoes
 		/// <summary>
 		/// Fill space to the right of the left border
 		/// </summary>
-		public static FrameContext FillRight(this FrameContext fc)
+		public static FrameContext<T> FillRight<T>(this FrameContext<T> fc) where T : UIView
 		{
 			fc.Frame.Width = fc.ParentBounds.Value.Width - fc.Frame.Left;
 			return fc;
@@ -340,13 +334,13 @@ namespace RottenTomatoes
 		#endregion
 
 		#region Movement
-		public static FrameContext MoveX(this FrameContext fc, float dx)
+		public static FrameContext<T> MoveX<T>(this FrameContext<T> fc, float dx) where T : UIView
 		{
 			fc.Frame.X += dx;
 			return fc;
 		}
 
-		public static FrameContext MoveY(this FrameContext fc, float dy, float? minY = null, float? maxY = null)
+		public static FrameContext<T> MoveY<T>(this FrameContext<T> fc, float dy, float? minY = null, float? maxY = null) where T : UIView
 		{
 			fc.Frame.Y += dy;
 

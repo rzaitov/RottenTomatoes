@@ -15,6 +15,9 @@ namespace RottenTomatoes
 		public const string Runtime = "Runing time";
 		public const string Genre = "Genre";
 		public const string TheaterRelease = "Theater release";
+
+		public const string CriticsLiked = "of critics liked it";
+		public const string UsersLiked = "of users liked it";
+		public const string InTheaters = "In theaters";
 	}
 }
-
