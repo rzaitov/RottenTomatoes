@@ -8,7 +8,7 @@ namespace Logic
 {
 	public class RottenTomatoesService : IRottenTomatoesService
 	{
-		private const string Key = "chshuwu2c2pu5zhgsv8vrkgd";
+		private readonly string Key;
 		private readonly HttpClient _client;
 
 		private readonly Uri BaseUri = new Uri("http://api.rottentomatoes.com");
@@ -17,10 +17,12 @@ namespace Logic
 		private readonly string InTheatersResource = "/api/public/v1.0/lists/movies/in_theaters.json";
 		private readonly string KeyQuery;
 
-		public RottenTomatoesService ()
+		public RottenTomatoesService (string key)
 		{
-			_client = new HttpClient();
+			Key = key;
 			KeyQuery = string.Format("apikey={0}", Key);
+
+			_client = new HttpClient();
 		}
 
 		public void GetTopBoxOfficeAsync(Action<IList<Movie>> callback)

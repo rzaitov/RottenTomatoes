@@ -18,7 +18,8 @@ namespace RottenTomatoes
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-//			_service = new RottenTomatoesService ();
+			string rottenKey = NSBundle.MainBundle.ObjectForInfoDictionary("RottenTomatoesKey").ToString();
+//			_service = new RottenTomatoesService (rottenKey);
 			_service = new MockService();
 
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
@@ -27,12 +28,6 @@ namespace RottenTomatoes
 			_window.RootViewController = _boxOfficeViewController;
 
 			_window.MakeKeyAndVisible ();
-
-//			RottenTomatoesService service = new RottenTomatoesService ();
-//			service.GetTopBoxOfficeAsync (movies => {
-//				Console.WriteLine(movies);
-//			});
-
 
 			return true;
 		}
