@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Logic
 {
-	public class RottenTomatoesService
+	public class RottenTomatoesService : IRottenTomatoesService
 	{
 		private const string Key = "chshuwu2c2pu5zhgsv8vrkgd";
 		private readonly HttpClient _client;

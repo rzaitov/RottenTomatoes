@@ -14,7 +14,7 @@ namespace RottenTomatoes
 		private UIWindow _window;
 		private BoxOfficeViewController _boxOfficeViewController;
 
-		private RottenTomatoesService _service;
+		private IRottenTomatoesService _service;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{

@@ -8,9 +8,9 @@ namespace RottenTomatoes
 	{
 		private BoxOfficeView _view;
 
-		private readonly RottenTomatoesService _service;
+		private readonly IRottenTomatoesService _service;
 
-		public BoxOfficeViewController (RottenTomatoesService service)
+		public BoxOfficeViewController (IRottenTomatoesService service)
 		{
 			_service = service;
 		}
