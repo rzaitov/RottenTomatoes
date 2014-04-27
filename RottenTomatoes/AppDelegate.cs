@@ -18,7 +18,8 @@ namespace RottenTomatoes
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			_service = new RottenTomatoesService ();
+//			_service = new RottenTomatoesService ();
+			_service = new MockService();
 
 			_window = new UIWindow (UIScreen.MainScreen.Bounds);
 

@@ -7,9 +7,9 @@ namespace Logic
 	{
 		void GetTopBoxOfficeAsync(Action<IList<Movie>> callback);
 
-		void GetOpeningThisWeek(Action<IList<Movie>> callback);
+		void GetOpeningThisWeekAsync(Action<IList<Movie>> callback);
 
-		void GetInTheaters(Action<IList<Movie>> callback);
+		void GetInTheatersAsync(Action<IList<Movie>> callback);
 	}
 }
 

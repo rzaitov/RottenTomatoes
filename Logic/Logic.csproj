@@ -42,6 +42,8 @@
     <Compile Include="Formatters\MpaaRuntimeFormatter.cs" />
     <Compile Include="Service\RottenTomatoesService.cs" />
     <Compile Include="Service\IRottenTomatoesService.cs" />
+    <Compile Include="Service\MockService.cs" />
+    <Compile Include="FuncTools.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

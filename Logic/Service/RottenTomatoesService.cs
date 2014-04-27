@@ -28,12 +28,12 @@ namespace Logic
 			RequestMovies(TopBoxOfficeResource, callback);
 		}
 
-		public void GetOpeningThisWeek(Action<IList<Movie>> callback)
+		public void GetOpeningThisWeekAsync(Action<IList<Movie>> callback)
 		{
 			RequestMovies(OpeningThisWeekResource, callback);
 		}
 
-		public void GetInTheaters(Action<IList<Movie>> callback)
+		public void GetInTheatersAsync(Action<IList<Movie>> callback)
 		{
 			RequestMovies(InTheatersResource, callback);
 		}

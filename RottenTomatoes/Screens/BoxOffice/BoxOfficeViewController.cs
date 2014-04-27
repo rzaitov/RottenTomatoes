@@ -27,7 +27,7 @@ namespace RottenTomatoes
 		{
 			base.ViewDidLoad ();
 
-			_service.GetOpeningThisWeek (movies => {
+			_service.GetOpeningThisWeekAsync (movies => {
 				BeginInvokeOnMainThread (() => {
 					_view.ShowOpeningThisWeek (movies);
 				});
@@ -39,7 +39,7 @@ namespace RottenTomatoes
 				});
 			});
 
-			_service.GetInTheaters (movies => {
+			_service.GetInTheatersAsync (movies => {
 				BeginInvokeOnMainThread (() => {
 					_view.ShowInTheaters (movies);
 				});
