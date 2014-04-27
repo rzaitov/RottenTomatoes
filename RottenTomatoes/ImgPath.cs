@@ -8,6 +8,7 @@ namespace RottenTomatoes
 		{
 			public const string Fresh = "Indicators/fresh.png";
 			public const string Rotten = "Indicators/rotten.png";
+			public const string User = "Indicators/user.png";
 		}
 	}
 }

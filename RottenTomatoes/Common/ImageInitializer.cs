@@ -13,6 +13,16 @@ namespace RottenTomatoes
 				return new UIImageView(img);
 		}
 
+		public static void InitImageView(string imagePath, UIImageView imgView)
+		{
+			Assert.NotNull(imgView);
+
+			using (UIImage img = UIImage.FromFile(imagePath)) {
+				imgView.Image = img;
+				imgView.SizeToFit();
+			}
+		}
+
 		public static UIImageView InitResizableImageView(string imagePath, UIEdgeInsets insetes)
 		{
 			using(UIImage img = InitResizableImage(imagePath, insetes))
