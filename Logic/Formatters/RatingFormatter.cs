@@ -2,13 +2,9 @@
 
 namespace Logic
 {
-	public class RatingFormatter
+	public static class RatingFormatter
 	{
-		public RatingFormatter ()
-		{
-		}
-
-		public string Format(int rating)
+		public static string Format(int rating)
 		{
 			if (rating < 0)
 				return string.Empty;

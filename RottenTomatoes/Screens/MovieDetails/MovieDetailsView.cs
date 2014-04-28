@@ -114,8 +114,7 @@ namespace RottenTomatoes
 
 			SetTitleValueFor(_rated, Strings.Rated, movie.mpaa_rating);
 
-			var rf = new RuntimeFormatter();
-			string runtime = rf.Format(movie.runtime);
+			string runtime = RuntimeFormatter.Format(movie.runtime);
 			SetTitleValueFor(_runingTime, Strings.Runtime, runtime);
 
 			string genre = string.Join(", ", movie.genres);

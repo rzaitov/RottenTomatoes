@@ -2,13 +2,9 @@
 
 namespace Logic
 {
-	public class RuntimeFormatter
+	public static class RuntimeFormatter
 	{
-		public RuntimeFormatter ()
-		{
-		}
-
-		public string Format(int? minutes)
+		public static string Format(int? minutes)
 		{
 			if (!minutes.HasValue)
 				return string.Empty;

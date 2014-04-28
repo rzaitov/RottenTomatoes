@@ -18,16 +18,12 @@ namespace RottenTomatoes
 		private UIImageView _thumbnail, _freshImg, _rottenImg;
 		private UILabel _criticScore, _actors, _mppaRuntime;
 
-		private readonly RatingFormatter _ratingFormatter;
-
 		private Uri _imgUri;
 
 		public MovieCell(UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
 		{
 			SelectionStyle = UITableViewCellSelectionStyle.None;
-
-			_ratingFormatter = new RatingFormatter();
 
 			_thumbnail = new UIImageView {
 				BackgroundColor = UIColor.Gray
@@ -69,7 +65,7 @@ namespace RottenTomatoes
 			_movieTitle.Text = movie.title;
 			_movieTitle.SizeToFit();
 
-			_criticScore.Text = _ratingFormatter.Format(movie.ratings.critics_score);
+			_criticScore.Text = RatingFormatter.Format(movie.ratings.critics_score);
 			_criticScore.SizeToFit();
 
 			_actors.Text = PersonFormatter.Format(2, movie.abridged_cast);
