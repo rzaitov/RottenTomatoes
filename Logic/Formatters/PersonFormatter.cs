@@ -4,19 +4,19 @@ using System.Linq;
 
 namespace Logic
 {
-	public class ActorsFormatter
+	public static class PersonFormatter
 	{
-		public string Format(int take, IEnumerable<Person> actors)
+		public static string Format(int take, IEnumerable<Person> actors)
 		{
 			return JoinNames(actors, take);
 		}
 
-		public string Format(IEnumerable<Person> actors)
+		public static string Format(IEnumerable<Person> actors)
 		{
 			return JoinNames(actors, -1);
 		}
 
-		private string JoinNames(IEnumerable<Person> actors, int take)
+		private static string JoinNames(IEnumerable<Person> actors, int take)
 		{
 			IEnumerable<string> names = actors.Select(actor => actor.name);
 

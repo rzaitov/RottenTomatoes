@@ -42,6 +42,9 @@ namespace RottenTomatoes
 
 			_service.GetMovieReviews(MovieId, reviews =>
 				InvokeOnMainThread(() => _view.BindCriticsReviews(reviews)));
+
+			_service.GetMovieFullCast(MovieId, fullCast =>
+				InvokeOnMainThread(() => _view.BindCast(fullCast)));
 		}
 
 		[BubbleEventHandler("moreClicked")]

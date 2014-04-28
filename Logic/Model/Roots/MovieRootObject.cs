@@ -16,7 +16,7 @@ namespace Logic
 		public Ratings ratings { get; set; }
 		public string synopsis { get; set; }
 		public Posters posters { get; set; }
-		public List<AbridgedCast> abridged_cast { get; set; }
+		public List<Cast> abridged_cast { get; set; }
 		public List<Person> abridged_directors { get; set; }
 		public string studio { get; set; }
 		public AlternateIds alternate_ids { get; set; }

@@ -109,12 +109,7 @@ namespace RottenTomatoes
 
 			SetTitleValueFor(_synopsis, Strings.Synopsis, movie.synopsis);
 
-			ActorsFormatter af = new ActorsFormatter();
-
-			string cast = af.Format(movie.abridged_cast);
-			SetTitleValueFor(_cast, Strings.Cast, cast);
-
-			string directors = af.Format(movie.abridged_directors);
+			string directors = PersonFormatter.Format(movie.abridged_directors);
 			SetTitleValueFor(_director, Strings.Director, directors);
 
 			SetTitleValueFor(_rated, Strings.Rated, movie.mpaa_rating);
@@ -127,6 +122,14 @@ namespace RottenTomatoes
 			SetTitleValueFor(_genre, Strings.Genre, genre);
 
 			SetTitleValueFor(_release, Strings.TheaterRelease, release);
+
+			BindCast(movie.abridged_cast);
+		}
+
+		public void BindCast(IList<Cast> cast)
+		{
+			string joinedCast = PersonFormatter.Format(cast);
+			SetTitleValueFor(_cast, Strings.Cast, joinedCast);
 
 			LayoutSubviews();
 		}

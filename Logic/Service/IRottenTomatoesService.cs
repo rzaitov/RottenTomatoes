@@ -14,6 +14,8 @@ namespace Logic
 		void GetMovieDetails(string movieId, Action<MovieDetails> callback);
 
 		void GetMovieReviews(string movieId, Action<IList<Review>> callback);
+
+		void GetMovieFullCast(string movieId, Action<IList<Cast>> callback);
 	}
 }
 

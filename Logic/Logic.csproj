@@ -35,7 +35,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assert.cs" />
     <Compile Include="Formatters\RatingFormatter.cs" />
-    <Compile Include="Formatters\ActorsFormatter.cs" />
     <Compile Include="Formatters\RuntimeFormatter.cs" />
     <Compile Include="Formatters\MpaaRuntimeFormatter.cs" />
     <Compile Include="Service\RottenTomatoesService.cs" />
@@ -46,7 +45,6 @@
     <Compile Include="Model\ReleaseDates.cs" />
     <Compile Include="Model\Ratings.cs" />
     <Compile Include="Model\Posters.cs" />
-    <Compile Include="Model\AbridgedCast.cs" />
     <Compile Include="Model\AlternateIds.cs" />
     <Compile Include="Model\Links.cs" />
     <Compile Include="Model\Movie.cs" />
@@ -58,6 +56,9 @@
     <Compile Include="Formatters\ReleaseDateFormatter.cs" />
     <Compile Include="Service\Service.cs" />
     <Compile Include="Model\ReviewLinks.cs" />
+    <Compile Include="Model\Roots\CastRootObject.cs" />
+    <Compile Include="Model\Cast.cs" />
+    <Compile Include="Formatters\PersonFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
