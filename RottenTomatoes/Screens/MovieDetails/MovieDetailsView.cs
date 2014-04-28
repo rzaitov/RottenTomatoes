@@ -23,6 +23,7 @@ namespace RottenTomatoes
 		private UILabel _mppaRuntime;
 
 		private UIView _container;
+		private UILabel _movieInfoHeader;
 		private UILabel _synopsis;
 		private UILabel _cast;
 		private UILabel _director;
@@ -30,6 +31,7 @@ namespace RottenTomatoes
 		private UILabel _runingTime;
 		private UILabel _genre;
 		private UILabel _release;
+		private UILabel _criticReviewsHeader;
 
 		private UITableView _table;
 		private ReviewSource _source;
@@ -41,7 +43,7 @@ namespace RottenTomatoes
 			BackgroundColor = UIColor.White;
 
 			_container = new UIView {
-				(_title = new UILabel()),
+				(_title = UIFactory.MovieDetails.LeadSectionHeader()),
 				(_profilePoster = new UIImageView()),
 
 				(_fresIndicator = new UIImageView()),
@@ -54,18 +56,18 @@ namespace RottenTomatoes
 				(_topReleaseDate = new UILabel()),
 				(_mppaRuntime = new UILabel()),
 
+
+				(_movieInfoHeader = UIFactory.MovieDetails.SlaveSectionHeader(Strings.MovieInfoHeader)),
 				(_synopsis = UIFactory.MultiLineLabel()),
 				(_cast = UIFactory.MultiLineLabel()),
 				(_director = UIFactory.MultiLineLabel()),
 				(_rated = UIFactory.MultiLineLabel()),
 				(_runingTime = UIFactory.MultiLineLabel()),
 				(_genre = UIFactory.MultiLineLabel()),
-				(_release = UIFactory.MultiLineLabel())
-			};
+				(_release = UIFactory.MultiLineLabel()),
 
-			_title.Font = Fonts.Bold14;
-			_title.BackgroundColor = UIColor.Red;
-			_title.TextColor = UIColor.White;
+				(_criticReviewsHeader = UIFactory.MovieDetails.SlaveSectionHeader(Strings.CriticReviewsHeader)),
+			};
 
 			ImageInitializer.InitImageView(ImgPath.Indicators.FreshSmall, _fresIndicator);
 			ImageInitializer.InitImageView(ImgPath.Indicators.RottenSmall, _rottenIndicator);
@@ -96,6 +98,8 @@ namespace RottenTomatoes
 
 			_title.Text = movie.title;
 			_criticsScore.Text = GetScore(movie.ratings.critics_score, Strings.CriticsLiked);
+			_criticsScore.Hidden = _fresIndicator.Hidden && _rottenIndicator.Hidden;
+
 			_usersScore.Text = GetScore(movie.ratings.audience_score, Strings.UsersLiked);
 
 			var release = ReleaseDateFormatter.Format(movie.release_dates.theater);
@@ -167,8 +171,8 @@ namespace RottenTomatoes
 
 			_container.Begin().FillHorizontally().Commit();
 
-			_title.SizeToFit();
-			_title.Begin().FillHorizontally().Commit();
+			LayoutHeader(_title);
+
 			_profilePoster.Begin().Size(120f, 178f).PlaceBelow(_title).Commit();
 
 			_fresIndicator.Begin().PlaceRight(_profilePoster, space).PlaceBelow(_title).Commit();
@@ -183,17 +187,28 @@ namespace RottenTomatoes
 
 			_synopsis.Begin().PlaceBelow(_profilePoster).FillHorizontally().Commit().SizeToFit();
 
-			AppendToStack(_synopsis, _profilePoster);
+			AppendToStack(_movieInfoHeader, _profilePoster);
+			AppendToStack(_synopsis, _movieInfoHeader);
 			AppendToStack(_cast, _synopsis);
 			AppendToStack(_director, _cast);
 			AppendToStack(_rated, _director);
 			AppendToStack(_runingTime, _rated);
 			AppendToStack(_genre, _runingTime);
 			AppendToStack(_release, _genre);
+			AppendToStack(_criticReviewsHeader, _release);
 
-			_container.Begin().Height(_release.Frame.Bottom).Commit();
+			LayoutHeader(_movieInfoHeader);
+			LayoutHeader(_criticReviewsHeader);
+
+			_container.Begin().Height(_criticReviewsHeader.Frame.Bottom).Commit();
 			_table.TableHeaderView = _container;
 			_table.Begin().Fill().Commit();
+		}
+
+		private void LayoutHeader(UILabel header)
+		{
+			header.SizeToFit();
+			header.Begin().FillHorizontally().Commit();
 		}
 
 		private void AppendToStack(UILabel label, UIView topView)

@@ -50,6 +50,27 @@ namespace RottenTomatoes
 
 				return quoteLbl;
 			}
+
+			public static UILabel LeadSectionHeader()
+			{
+				UILabel lbl = new UILabel();
+				lbl.Font = Fonts.Bold14;
+				lbl.BackgroundColor = UIColor.Red;
+				lbl.TextColor = UIColor.White;
+
+				return lbl;
+			}
+
+			public static UILabel SlaveSectionHeader(string header)
+			{
+				UILabel lbl = new UILabel();
+				lbl.Font = Fonts.Bold14;
+				lbl.BackgroundColor = UIColor.Black;
+				lbl.TextColor = UIColor.White;
+				lbl.Text = header;
+
+				return lbl;
+			}
 		}
 	}
 }

@@ -11,6 +11,9 @@ namespace RottenTomatoes
 		public const string OpeningThisWeek = "Opening This Week";
 		public const string AlsoInTheaters = "Also In Theaters";
 
+		public const string MovieInfoHeader = "Movie Info";
+		public const string CriticReviewsHeader = "Critic Reviews";
+
 		public const string Synopsis = "Synopsis";
 		public const string Cast = "Cast";
 		public const string Director = "Director";
@@ -24,5 +27,6 @@ namespace RottenTomatoes
 		public const string InTheaters = "In theaters";
 
 		public const string More = "More...";
+		public const string NoReviewContent = "No recent ratings";
 	}
 }
