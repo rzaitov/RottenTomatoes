@@ -9,6 +9,7 @@ namespace RottenTomatoes
 		private readonly IRottenTomatoesService _service;
 
 		private MovieDetailsView _view;
+		private WebViewController _reviewController;
 
 		public MovieDetailsViewController(IRottenTomatoesService service)
 		{
@@ -32,6 +33,15 @@ namespace RottenTomatoes
 
 			_service.GetMovieReviews("771362204", reviews =>
 				InvokeOnMainThread(() => _view.BindCriticsReviews(reviews)));
+		}
+
+		[BubbleEventHandler("moreClicked")]
+		private void OnMoreClicked(object sender, ReviewEventArgs arg)
+		{
+			_reviewController = _reviewController ?? new WebViewController();
+			_reviewController.ReviewUrl = arg.Review.links.review;
+
+			NavigationController.PushViewController(_reviewController, true);
 		}
 	}
 }

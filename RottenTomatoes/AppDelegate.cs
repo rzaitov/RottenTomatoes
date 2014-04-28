@@ -16,6 +16,7 @@ namespace RottenTomatoes
 		private MovieDetailsViewController _detailsViewController;
 
 		private IRottenTomatoesService _service;
+		private UINavigationController _navigationController;
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
@@ -28,8 +29,9 @@ namespace RottenTomatoes
 			_boxOfficeViewController = new BoxOfficeViewController (_service);
 			_detailsViewController = new MovieDetailsViewController(_service);
 
+			_navigationController = new UINavigationController(_detailsViewController);
 //			_window.RootViewController = _boxOfficeViewController;
-			_window.RootViewController = _detailsViewController;
+			_window.RootViewController = _navigationController;
 
 			_window.MakeKeyAndVisible ();
 

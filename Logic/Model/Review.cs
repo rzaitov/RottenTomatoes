@@ -10,7 +10,7 @@ namespace Logic
 		public string freshness { get; set; }
 		public string publication { get; set; }
 		public string quote { get; set; }
-		public Links links { get; set; }
+		public ReviewLinks links { get; set; }
 
 		public bool IsFresh
 		{

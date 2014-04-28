@@ -12,6 +12,8 @@ namespace RottenTomatoes
 		private UILabel _criticPublication, _quote;
 		private UIButton _more;
 
+		private Review _review;
+
 		public CriticReviewCell(UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
 		{
@@ -22,14 +24,23 @@ namespace RottenTomatoes
 			_criticPublication = UIFactory.MovieDetails.CriticPublicationLabel();
 			_quote = UIFactory.MovieDetails.QuoteLabel();
 			_more = UIFactory.MovieDetails.MoreLinkButton();
-			_more.AddTarget(null, new Selector("sender:event:"), UIControlEvent.TouchUpInside);
+			_more.TouchUpInside += OnMoreClicked;
 
 			ContentView.AddSubviews(_criticPublication, _quote);
 			ContentView.AddSubview(_more);
 		}
 
+		private void OnMoreClicked (object sender, EventArgs e)
+		{
+			this.RaiseEvent("moreClicked", this, new ReviewEventArgs {
+				Review = _review
+			});
+		}
+
 		public void Bind(Review review)
 		{
+			_review = review;
+
 			_freshIndicator.Hidden = !review.IsFresh;
 			_rottenIndicator.Hidden = !review.IsRotten;
 
