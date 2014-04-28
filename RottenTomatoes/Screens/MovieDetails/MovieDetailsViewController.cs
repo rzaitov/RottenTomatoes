@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using Logic;
+using MonoTouch.Foundation;
 
 namespace RottenTomatoes
 {
@@ -9,8 +10,6 @@ namespace RottenTomatoes
 		private readonly IRottenTomatoesService _service;
 
 		private MovieDetailsView _view;
-		private WebViewController _reviewController;
-
 		public string MovieId { get; set; }
 
 		public MovieDetailsViewController(IRottenTomatoesService service)
@@ -48,10 +47,8 @@ namespace RottenTomatoes
 		[BubbleEventHandler("moreClicked")]
 		private void OnMoreClicked(object sender, ReviewEventArgs arg)
 		{
-			_reviewController = _reviewController ?? new WebViewController();
-			_reviewController.ReviewUrl = arg.Review.links.review;
-
-			NavigationController.PushViewController(_reviewController, true);
+			NSUrl url = new NSUrl(arg.Review.links.review);
+			UIApplication.SharedApplication.OpenUrl(url);
 		}
 	}
 }

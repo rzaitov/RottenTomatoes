@@ -129,7 +129,6 @@
     <Compile Include="Common\BubbleEventHandler.cs" />
     <Compile Include="Common\ResponderHelper.cs" />
     <Compile Include="Screens\MovieDetails\ReviewEventArgs.cs" />
-    <Compile Include="Screens\WebViewController.cs" />
     <Compile Include="Screens\BoxOffice\MovieEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
