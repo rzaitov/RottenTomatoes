@@ -2,13 +2,12 @@
 
 namespace Logic
 {
-	public class MpaaRuntimeFormatter
+	public static class MpaaRuntimeFormatter
 	{
-		public string Format(string mpaa, int? duration)
+		public static string Format(string mpaa, int? duration)
 		{
 			if (duration.HasValue) {
-				RuntimeFormatter rf = new RuntimeFormatter();
-				return string.Format("{0}, {1}", mpaa, rf.Format(duration));
+				return string.Format("{0}, {1}", mpaa, RuntimeFormatter.Format(duration));
 			}
 
 			return mpaa;

@@ -97,8 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\Indicators\fresh.png" />
-    <BundleResource Include="Resources\Indicators\rotten.png" />
+    <BundleResource Include="Resources\Indicators\user%402x.png" />
+    <BundleResource Include="Resources\Indicators\rottenBig.png" />
+    <BundleResource Include="Resources\Indicators\freshBig.png" />
+    <BundleResource Include="Resources\Indicators\freshSmall.png" />
+    <BundleResource Include="Resources\Indicators\rottenSmall.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -117,6 +120,16 @@
     <Compile Include="Screens\BoxOffice\SectionType.cs" />
     <Compile Include="AppCommon\Fonts.cs" />
     <Compile Include="AppCommon\Strings.cs" />
+    <Compile Include="Screens\MovieDetails\MovieDetailsView.cs" />
+    <Compile Include="Screens\MovieDetails\MovieDetailsViewController.cs" />
+    <Compile Include="Common\AttributedStringBuilder.cs" />
+    <Compile Include="AppCommon\UIFactory.cs" />
+    <Compile Include="Screens\MovieDetails\CriticReviewCell.cs" />
+    <Compile Include="Screens\MovieDetails\ReviewSource.cs" />
+    <Compile Include="Common\BubbleEventHandler.cs" />
+    <Compile Include="Common\ResponderHelper.cs" />
+    <Compile Include="Screens\MovieDetails\ReviewEventArgs.cs" />
+    <Compile Include="Screens\BoxOffice\MovieEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

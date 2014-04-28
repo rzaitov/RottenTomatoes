@@ -10,6 +10,12 @@ namespace Logic
 		void GetOpeningThisWeekAsync(Action<IList<Movie>> callback);
 
 		void GetInTheatersAsync(Action<IList<Movie>> callback);
+
+		void GetMovieDetails(string movieId, Action<MovieDetails> callback);
+
+		void GetMovieReviews(string movieId, Action<IList<Review>> callback);
+
+		void GetMovieFullCast(string movieId, Action<IList<Cast>> callback);
 	}
 }
 

@@ -80,6 +80,16 @@ namespace RottenTomatoes
 					throw new NotImplementedException();
 			}
 		}
+
+		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+		{
+			IList<Movie> source = GetSourceForSection(indexPath.Section);
+			MovieEventArgs arg = new MovieEventArgs {
+				Movie = source[indexPath.Row]
+			};
+
+			tableView.RaiseEvent("moveClicked", tableView, arg);
+		}
 	}
 }
 

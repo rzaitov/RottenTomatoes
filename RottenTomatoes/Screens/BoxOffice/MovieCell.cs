@@ -18,18 +18,12 @@ namespace RottenTomatoes
 		private UIImageView _thumbnail, _freshImg, _rottenImg;
 		private UILabel _criticScore, _actors, _mppaRuntime;
 
-		private readonly RatingFormatter _ratingFormatter;
-		private readonly ActorsFormatter _actorsFormatter;
-		private readonly MpaaRuntimeFormatter _mpaaRuntimeFormatter;
-
 		private Uri _imgUri;
 
 		public MovieCell(UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
 		{
-			_ratingFormatter = new RatingFormatter();
-			_actorsFormatter = new ActorsFormatter();
-			_mpaaRuntimeFormatter = new MpaaRuntimeFormatter();
+			SelectionStyle = UITableViewCellSelectionStyle.None;
 
 			_thumbnail = new UIImageView {
 				BackgroundColor = UIColor.Gray
@@ -42,8 +36,8 @@ namespace RottenTomatoes
 			};
 			ContentView.AddSubview(_movieTitle);
 
-			_freshImg = ImageInitializer.InitImageView(ImgPath.Indicators.Fresh);
-			_rottenImg = ImageInitializer.InitImageView(ImgPath.Indicators.Rotten);
+			_freshImg = ImageInitializer.InitImageView(ImgPath.Indicators.FreshSmall);
+			_rottenImg = ImageInitializer.InitImageView(ImgPath.Indicators.RottenSmall);
 			ContentView.AddSubviews(_freshImg, _rottenImg);
 //			_freshImg.Hidden = _rottenImg.Hidden = true;
 
@@ -65,21 +59,19 @@ namespace RottenTomatoes
 
 		public void Bind(Movie movie)
 		{
-			bool isFresh = movie.ratings.IsFresh;
-			bool indicatorExists = !string.IsNullOrWhiteSpace(movie.ratings.critics_rating);
-			_freshImg.Hidden = !isFresh || !indicatorExists;
-			_rottenImg.Hidden = isFresh || !indicatorExists;
+			_freshImg.Hidden = !movie.ratings.IsFresh;
+			_rottenImg.Hidden = !movie.ratings.IsRotten;
 
 			_movieTitle.Text = movie.title;
 			_movieTitle.SizeToFit();
 
-			_criticScore.Text = _ratingFormatter.Format(movie.ratings.critics_score);
+			_criticScore.Text = RatingFormatter.Format(movie.ratings.critics_score);
 			_criticScore.SizeToFit();
 
-			_actors.Text = _actorsFormatter.Format(2, movie.abridged_cast);
+			_actors.Text = PersonFormatter.Format(2, movie.abridged_cast);
 			_actors.SizeToFit();
 
-			_mppaRuntime.Text = _mpaaRuntimeFormatter.Format(movie.mpaa_rating, movie.runtime);
+			_mppaRuntime.Text = MpaaRuntimeFormatter.Format(movie.mpaa_rating, movie.runtime);
 			_mppaRuntime.SizeToFit();
 
 			_imgUri = new Uri(movie.posters.thumbnail);
