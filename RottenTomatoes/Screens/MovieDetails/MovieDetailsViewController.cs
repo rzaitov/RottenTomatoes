@@ -11,6 +11,8 @@ namespace RottenTomatoes
 		private MovieDetailsView _view;
 		private WebViewController _reviewController;
 
+		public string MovieId { get; set; }
+
 		public MovieDetailsViewController(IRottenTomatoesService service)
 		{
 			_service = service;
@@ -24,14 +26,20 @@ namespace RottenTomatoes
 			View = _view;
 		}
 
+		public override void ViewDidLoad()
+		{
+			base.ViewDidLoad();
+			Title = "Details";
+		}
+
 		public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
 
-			_service.GetMovieDetails("771362204", movieDetails =>
+			_service.GetMovieDetails(MovieId, movieDetails =>
 				InvokeOnMainThread(() => _view.BindMovieDetails(movieDetails)));
 
-			_service.GetMovieReviews("771362204", reviews =>
+			_service.GetMovieReviews(MovieId, reviews =>
 				InvokeOnMainThread(() => _view.BindCriticsReviews(reviews)));
 		}
 

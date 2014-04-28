@@ -9,6 +9,7 @@ namespace RottenTomatoes
 		private BoxOfficeView _view;
 
 		private readonly IRottenTomatoesService _service;
+		private MovieDetailsViewController _detailsViewController;
 
 		public BoxOfficeViewController (IRottenTomatoesService service)
 		{
@@ -27,6 +28,8 @@ namespace RottenTomatoes
 		{
 			base.ViewDidLoad ();
 
+			Title = Strings.BoxOfficeScreenTitle;
+
 			_service.GetOpeningThisWeekAsync (movies => {
 				BeginInvokeOnMainThread (() => {
 					_view.ShowOpeningThisWeek (movies);
@@ -44,7 +47,14 @@ namespace RottenTomatoes
 					_view.ShowInTheaters (movies);
 				});
 			});
+		}
 
+		[BubbleEventHandler("moveClicked")]
+		private void OnMovieClicked(object sender, MovieEventArgs e)
+		{
+			_detailsViewController = _detailsViewController ?? new MovieDetailsViewController(_service);
+			_detailsViewController.MovieId = e.Movie.id;
+			NavigationController.PushViewController(_detailsViewController, true);
 		}
 	}
 }

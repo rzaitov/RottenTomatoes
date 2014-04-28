@@ -26,6 +26,8 @@ namespace RottenTomatoes
 		public MovieCell(UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
 		{
+			SelectionStyle = UITableViewCellSelectionStyle.None;
+
 			_ratingFormatter = new RatingFormatter();
 			_actorsFormatter = new ActorsFormatter();
 

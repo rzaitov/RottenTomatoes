@@ -29,7 +29,7 @@ namespace RottenTomatoes
 			_boxOfficeViewController = new BoxOfficeViewController (_service);
 			_detailsViewController = new MovieDetailsViewController(_service);
 
-			_navigationController = new UINavigationController(_detailsViewController);
+			_navigationController = new UINavigationController(_boxOfficeViewController);
 //			_window.RootViewController = _boxOfficeViewController;
 			_window.RootViewController = _navigationController;
 

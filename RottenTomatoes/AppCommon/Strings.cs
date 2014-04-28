@@ -4,6 +4,9 @@ namespace RottenTomatoes
 {
 	public static class Strings
 	{
+		public const string DetailsScreenTitle = "Details";
+		public const string BoxOfficeScreenTitle = "Box Office";
+
 		public const string TopBoxOffice = "Top Box Office";
 		public const string OpeningThisWeek = "Opening This Week";
 		public const string AlsoInTheaters = "Also In Theaters";
