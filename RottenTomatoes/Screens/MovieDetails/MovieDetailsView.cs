@@ -22,7 +22,7 @@ namespace RottenTomatoes
 		private UILabel _topReleaseDate;
 		private UILabel _mppaRuntime;
 
-		private UIScrollView _container;
+		private UIView _container;
 		private UILabel _synopsis;
 		private UILabel _cast;
 		private UILabel _director;
@@ -40,7 +40,7 @@ namespace RottenTomatoes
 		{
 			BackgroundColor = UIColor.White;
 
-			_container = new UIScrollView {
+			_container = new UIView {
 				(_title = new UILabel()),
 				(_profilePoster = new UIImageView()),
 
@@ -62,7 +62,6 @@ namespace RottenTomatoes
 				(_genre = UIFactory.MultiLineLabel()),
 				(_release = UIFactory.MultiLineLabel())
 			};
-//			AddSubview(_container);
 
 			_title.Font = Fonts.Bold14;
 			_title.BackgroundColor = UIColor.Red;
@@ -80,9 +79,9 @@ namespace RottenTomatoes
 			_source = new ReviewSource();
 			_table = new UITableView {
 				Source = _source,
-				SeparatorInset = UIEdgeInsets.Zero
+				SeparatorInset = UIEdgeInsets.Zero,
+				TableHeaderView = _container
 			};
-//			_table.RowHeight = 70f;
 			AddSubview(_table);
 		}
 
@@ -160,8 +159,8 @@ namespace RottenTomatoes
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
-			/*
-			_container.Begin().Fill().Commit();
+
+			_container.Begin().FillHorizontally().Commit();
 
 			_title.SizeToFit();
 			_title.Begin().FillHorizontally().Commit();
@@ -187,8 +186,8 @@ namespace RottenTomatoes
 			AppendToStack(_genre, _runingTime);
 			AppendToStack(_release, _genre);
 
-			_container.ContentSize = new SizeF(320f, _release.Frame.Bottom);
-			*/
+			_container.Begin().Height(_release.Frame.Bottom).Commit();
+			_table.TableHeaderView = _container;
 			_table.Begin().Fill().Commit();
 		}
 
