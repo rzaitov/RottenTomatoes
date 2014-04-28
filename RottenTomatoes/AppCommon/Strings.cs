@@ -19,5 +19,7 @@ namespace RottenTomatoes
 		public const string CriticsLiked = "of critics liked it";
 		public const string UsersLiked = "of users liked it";
 		public const string InTheaters = "In theaters";
+
+		public const string More = "More...";
 	}
 }

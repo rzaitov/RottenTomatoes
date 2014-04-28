@@ -1,6 +1,8 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using Logic;
+using MonoTouch.ObjCRuntime;
+using System.Drawing;
 
 namespace RottenTomatoes
 {
@@ -8,6 +10,7 @@ namespace RottenTomatoes
 	{
 		private UIImageView _freshIndicator, _rottenIndicator;
 		private UILabel _criticPublication, _quote;
+		private UIButton _more;
 
 		public CriticReviewCell(UITableViewCellStyle style, string reuseId)
 			: base(style, reuseId)
@@ -16,13 +19,13 @@ namespace RottenTomatoes
 			_rottenIndicator = ImageInitializer.InitImageView(ImgPath.Indicators.RottenBig);
 			ContentView.AddSubviews(_freshIndicator, _rottenIndicator);
 
-			_criticPublication = new UILabel();
-			_criticPublication.Font = Fonts.Italic14;
-
-			_quote = UIFactory.MultiLineLabel();
-			_quote.Font = Fonts.Regular14;
+			_criticPublication = UIFactory.MovieDetails.CriticPublicationLabel();
+			_quote = UIFactory.MovieDetails.QuoteLabel();
+			_more = UIFactory.MovieDetails.MoreLinkButton();
+			_more.AddTarget(null, new Selector("sender:event:"), UIControlEvent.TouchUpInside);
 
 			ContentView.AddSubviews(_criticPublication, _quote);
+			ContentView.AddSubview(_more);
 		}
 
 		public void Bind(Review review)
@@ -36,6 +39,14 @@ namespace RottenTomatoes
 			LayoutSubviews();
 		}
 
+		public override SizeF SizeThatFits(SizeF size)
+		{
+			SizeF s = new SizeF(size);
+			s.Height = _more.Frame.Bottom;
+
+			return s;
+		}
+
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
@@ -45,6 +56,7 @@ namespace RottenTomatoes
 
 			_criticPublication.Begin().PlaceRight(_freshIndicator, 5f).Commit().SizeToFit();
 			_quote.Begin().PlaceRight(_freshIndicator, 5f).PlaceBelow(_criticPublication).FillRight().Commit().SizeToFit();
+			_more.Begin().PlaceBelow(_quote).PlaceRight(_freshIndicator, 5f).Commit();
 		}
 	}
 }

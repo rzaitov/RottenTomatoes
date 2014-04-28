@@ -12,15 +12,19 @@ namespace RottenTomatoes
 	{
 		private const string ReuseId = "CriticCell";
 
-		private UILabel _calcQuote;
+//		private UILabel _calcQuote, _calcCriticPublication;
+//		private UIButton _calcMore;
+		CriticReviewCell _calcCell;
 		public IList<Review> Reviews { get; set; }
 
 		public ReviewSource()
 		{
 			Reviews = new Review[]{ };
 
-			_calcQuote = UIFactory.MultiLineLabel();
-			_calcQuote.Font = Fonts.Italic14;
+			_calcCell = new CriticReviewCell(UITableViewCellStyle.Default, ReuseId);
+//			_calcQuote = UIFactory.MovieDetails.QuoteLabel();
+//			_calcCriticPublication = UIFactory.MovieDetails.CriticPublicationLabel();
+//			_calcMore = UIFactory.MovieDetails.MoreLinkButton();
 		}
 
 		public override int RowsInSection(UITableView tableview, int section)
@@ -30,9 +34,10 @@ namespace RottenTomatoes
 
 		public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 		{
-			_calcQuote.Text = Reviews[indexPath.Row].quote;
-			_calcQuote.Begin().Width(280).Commit().SizeToFit();
-			return _calcQuote.Frame.Height + 20;
+			_calcCell.Bind(Reviews[indexPath.Row]);
+			_calcCell.SizeToFit();
+
+			return _calcCell.Frame.Height;
 		}
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
