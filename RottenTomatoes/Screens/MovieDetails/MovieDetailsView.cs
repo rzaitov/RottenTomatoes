@@ -156,6 +156,11 @@ namespace RottenTomatoes
 			label.AttributedText = asb.ToAttributedString();
 		}
 
+		public void ScrollToTop()
+		{
+			_table.ContentOffset = PointF.Empty;
+		}
+
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();

@@ -36,6 +36,8 @@ namespace RottenTomatoes
 		{
 			base.ViewWillAppear(animated);
 
+			_view.ScrollToTop();
+
 			_service.GetMovieDetails(MovieId, movieDetails =>
 				InvokeOnMainThread(() => _view.BindMovieDetails(movieDetails)));
 
