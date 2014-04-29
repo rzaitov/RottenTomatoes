@@ -20,6 +20,10 @@ namespace RottenTomatoes
 
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			#if DEBUG
+			Xamarin.Calabash.Start();
+			#endif
+
 			string rottenKey = NSBundle.MainBundle.ObjectForInfoDictionary("RottenTomatoesKey").ToString();
 			_service = new RottenTomatoesService (rottenKey);
 //			_service = new MockService();

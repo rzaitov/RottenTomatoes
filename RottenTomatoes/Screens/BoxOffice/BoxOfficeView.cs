@@ -13,6 +13,8 @@ namespace RottenTomatoes
 
 		public BoxOfficeView ()
 		{
+			AccessibilityLabel = "BoxOfficeScreen";
+
 			BackgroundColor = UIColor.White;
 
 			_table = new UITableView ();
