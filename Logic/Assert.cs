@@ -14,14 +14,13 @@ namespace Logic
 
 		public static void EqualsAny<T>(T pivot, IEnumerable<T> values)
 		{
-			if(!values.Contains(pivot))
+			if (!values.Contains(pivot))
 				throw new AssertException();
 		}
 
 		public static void NotNull(object param, string paramName = "")
 		{
-			if(param == null)
-			{
+			if (param == null) {
 				throw new AssertException(paramName);
 			}
 		}
@@ -36,16 +35,14 @@ namespace Logic
 		{
 			bool isAnyNotNull = parameters.Any(p => p != null);
 
-			if(!isAnyNotNull)
-			{
+			if (!isAnyNotNull) {
 				throw new AssertException("all parameters are equal to null");
 			}
 		}
 
 		public static void True(bool isTrue, string failMessage = "")
 		{
-			if(!isTrue)
-			{
+			if (!isTrue) {
 				throw new AssertException(failMessage);
 			}
 		}
@@ -59,10 +56,11 @@ namespace Logic
 	internal class AssertException : Exception
 	{
 		public AssertException()
-		{}
+		{
+		}
 
 		public AssertException(string message)
-			:base(message)
+			: base(message)
 		{
 
 		}

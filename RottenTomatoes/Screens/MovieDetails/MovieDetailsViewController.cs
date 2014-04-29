@@ -28,7 +28,7 @@ namespace RottenTomatoes
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			Title = "Details";
+			Title = Strings.DetailsScreenTitle;
 		}
 
 		public override void ViewWillAppear(bool animated)
@@ -38,19 +38,19 @@ namespace RottenTomatoes
 			_view.ScrollToTop();
 			_view.HideContent();
 
-			_service.GetMovieDetails(MovieId, movieDetails =>
+			_service.GetMovieDetailsAsync(MovieId, movieDetails =>
 				InvokeOnMainThread(() => {
 					_view.ShowContent();
 					_view.BindMovieDetails(movieDetails);
 				}));
 
-			_service.GetMovieReviews(MovieId, reviews =>
+			_service.GetMovieReviewsAsync(MovieId, reviews =>
 				InvokeOnMainThread(() => {
 					_view.ShowContent();
 					_view.BindCriticsReviews(reviews);
 				}));
 
-			_service.GetMovieFullCast(MovieId, fullCast =>
+			_service.GetMovieFullCastAsync(MovieId, fullCast =>
 				InvokeOnMainThread(() => {
 					_view.ShowContent();
 					_view.BindCast(fullCast);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-
 using Newtonsoft.Json;
 
 namespace Logic
@@ -17,8 +16,8 @@ namespace Logic
 
 		public void ExecuteAsync<T>(Uri uri, Action<T> callback)
 		{
-			Client.GetAsync (uri).ContinueWith (requestTask => {
-				if(requestTask.Status != TaskStatus.RanToCompletion)
+			Client.GetAsync(uri).ContinueWith(requestTask => {
+				if (requestTask.Status != TaskStatus.RanToCompletion)
 					return;
 
 				HttpResponseMessage responce = requestTask.Result;

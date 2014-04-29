@@ -10,11 +10,29 @@ namespace RottenTomatoes
 {
 	public class ReviewSource : UITableViewSource
 	{
+		private const float NullCellHeight = 100f;
+
 		private const string ReuseId = "CriticCell";
 		private const string NullCellReuseId = "NullCell";
 
 		CriticReviewCell _calcCell;
-		public IList<Review> Reviews { get; set; }
+
+		private IList<Review> _reviews;
+		public IList<Review> Reviews {
+			get {
+				return _reviews;
+			}
+			set {
+				Assert.NotNull(value);
+				_reviews = value;
+			}
+		}
+
+		private bool WillShowNullCell {
+			get {
+				return Reviews.Count == 0;
+			}
+		}
 
 		public ReviewSource()
 		{
@@ -31,31 +49,28 @@ namespace RottenTomatoes
 
 		public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
 		{
-			if (Reviews.Count > 0) {
+			if (WillShowNullCell) {
+				return NullCellHeight;
+			} else {
 				_calcCell.Bind(Reviews[indexPath.Row]);
 				_calcCell.SizeToFit();
-
 				return _calcCell.Frame.Height;
-			}
-			else {
-				return 100f;
 			}
 		}
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
-			if (Reviews.Count > 0) {
-				CriticReviewCell cell = (CriticReviewCell)tableView.DequeueReusableCell(ReuseId);
-				cell = cell ?? new CriticReviewCell(UITableViewCellStyle.Default, ReuseId);
-
-				cell.Bind(Reviews[indexPath.Row]);
-				return cell;
-			}
-			else {
+			if (WillShowNullCell) {
 				UITableViewCell cell = tableView.DequeueReusableCell(NullCellReuseId);
 				cell = cell ?? new UITableViewCell(UITableViewCellStyle.Default, NullCellReuseId);
 
 				cell.TextLabel.Text = Strings.NoReviewContent;
+				return cell;
+			} else {
+				CriticReviewCell cell = (CriticReviewCell)tableView.DequeueReusableCell(ReuseId);
+				cell = cell ?? new CriticReviewCell(UITableViewCellStyle.Default, ReuseId);
+
+				cell.Bind(Reviews[indexPath.Row]);
 				return cell;
 			}
 		}
