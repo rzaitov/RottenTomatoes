@@ -29,7 +29,7 @@ namespace Logic
 			throw new NotImplementedException();
 		}
 
-		public void GetMovieReviews(string movieId, Action<IList<Review>> callback)
+		public void GetMovieReviewsAsync(string movieId, Action<IList<Review>> callback)
 		{
 			throw new NotImplementedException();
 		}

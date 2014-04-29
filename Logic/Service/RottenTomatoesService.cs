@@ -55,7 +55,7 @@ namespace Logic
 			ExecuteAsync<MovieDetails>(movieDetailsUri, callback);
 		}
 
-		public void GetMovieReviews(string movieId, Action<IList<Review>> callback)
+		public void GetMovieReviewsAsync(string movieId, Action<IList<Review>> callback)
 		{
 			string resource = string.Format(MovieReviesResourcePattern, movieId);
 			Uri movieReviewsUri = CreateForResource(resource);
