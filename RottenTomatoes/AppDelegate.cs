@@ -34,7 +34,6 @@ namespace RottenTomatoes
 			_detailsViewController = new MovieDetailsViewController(_service);
 
 			_navigationController = new UINavigationController(_boxOfficeViewController);
-//			_window.RootViewController = _boxOfficeViewController;
 			_window.RootViewController = _navigationController;
 
 			_window.MakeKeyAndVisible ();
