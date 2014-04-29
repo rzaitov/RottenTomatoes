@@ -30,7 +30,7 @@ namespace RottenTomatoes
 
 		private bool WillShowNullCell {
 			get {
-				return Reviews.Count == 1;
+				return Reviews.Count == 0;
 			}
 		}
 
