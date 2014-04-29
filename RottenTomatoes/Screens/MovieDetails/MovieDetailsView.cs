@@ -87,6 +87,16 @@ namespace RottenTomatoes
 			AddSubview(_table);
 		}
 
+		public void HideContent()
+		{
+			_table.Hidden = true;
+		}
+
+		public void ShowContent()
+		{
+			_table.Hidden = false;
+		}
+
 		public void BindMovieDetails(MovieDetails movie)
 		{
 			_posterUri = new Uri(movie.posters.profile);

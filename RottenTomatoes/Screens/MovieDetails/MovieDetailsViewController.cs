@@ -36,15 +36,25 @@ namespace RottenTomatoes
 			base.ViewWillAppear(animated);
 
 			_view.ScrollToTop();
+			_view.HideContent();
 
 			_service.GetMovieDetails(MovieId, movieDetails =>
-				InvokeOnMainThread(() => _view.BindMovieDetails(movieDetails)));
+				InvokeOnMainThread(() => {
+					_view.ShowContent();
+					_view.BindMovieDetails(movieDetails);
+				}));
 
 			_service.GetMovieReviews(MovieId, reviews =>
-				InvokeOnMainThread(() => _view.BindCriticsReviews(reviews)));
+				InvokeOnMainThread(() => {
+					_view.ShowContent();
+					_view.BindCriticsReviews(reviews);
+				}));
 
 			_service.GetMovieFullCast(MovieId, fullCast =>
-				InvokeOnMainThread(() => _view.BindCast(fullCast)));
+				InvokeOnMainThread(() => {
+					_view.ShowContent();
+					_view.BindCast(fullCast);
+				}));
 		}
 
 		[BubbleEventHandler("moreClicked")]
