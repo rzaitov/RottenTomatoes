@@ -23,7 +23,7 @@ namespace Logic
 			if (take >= 0)
 				names = names.Take(take);
 
-			return string.Join (", ", names);
+			return string.Join(", ", names);
 		}
 	}
 }

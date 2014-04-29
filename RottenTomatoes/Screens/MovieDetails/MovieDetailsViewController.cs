@@ -28,7 +28,7 @@ namespace RottenTomatoes
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			Title = "Details";
+			Title = Strings.DetailsScreenTitle;
 		}
 
 		public override void ViewWillAppear(bool animated)

@@ -52,7 +52,6 @@ Global
 		$2.inheritsScope = text/plain
 		$2.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $3
-		$3.IndentSwitchBody = True
 		$3.BeforeMethodDeclarationParentheses = False
 		$3.BeforeMethodCallParentheses = False
 		$3.BeforeConstructorDeclarationParentheses = False

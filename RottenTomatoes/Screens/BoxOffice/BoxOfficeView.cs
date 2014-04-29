@@ -45,7 +45,6 @@ namespace RottenTomatoes
 
 		private void ReloadSection(SectionType sectionType)
 		{
-//			_table.ReloadData();
 			_table.ReloadSections(new NSIndexSet((uint)sectionType), UITableViewRowAnimation.None);
 		}
 

@@ -9,7 +9,7 @@ namespace Logic
 			if (rating < 0)
 				return string.Empty;
 
-			return string.Format ("{0} %", rating);
+			return string.Format("{0} %", rating);
 		}
 	}
 }

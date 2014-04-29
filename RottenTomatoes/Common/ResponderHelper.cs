@@ -1,8 +1,8 @@
 using System;
+using System.Reflection;
 
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;
-using System.Reflection;
 
 namespace RottenTomatoes
 {
@@ -34,8 +34,7 @@ namespace RottenTomatoes
 				if (attr == null)
 					continue;
 
-				if (attr.EventType == eventType)
-				{
+				if (attr.EventType == eventType) {
 					handler = m;
 					return true;
 				}

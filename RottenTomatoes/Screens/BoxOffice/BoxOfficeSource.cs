@@ -12,9 +12,38 @@ namespace RottenTomatoes
 	{
 		private const string ReuseId = "MovieCellReuseId";
 
-		public IList<Movie> TopBoxMovies { get; set; }
-		public IList<Movie> OpeningThisWeek { get; set; }
-		public IList<Movie> InTheater { get; set; }
+		private IList<Movie> _topBoxMovies;
+		public IList<Movie> TopBoxMovies {
+			get {
+				return _topBoxMovies;
+			}
+			set {
+				Assert.NotNull(value);
+				_topBoxMovies = value;
+			}
+		}
+
+		private IList<Movie> _openingThisWeek;
+		public IList<Movie> OpeningThisWeek {
+			get {
+				return _openingThisWeek;
+			}
+			set {
+				Assert.NotNull(value);
+				_openingThisWeek = value;
+			}
+		}
+
+		private IList<Movie> _inTheater;
+		public IList<Movie> InTheater {
+			get {
+				return _inTheater;
+			}
+			set {
+				Assert.NotNull(value);
+				_inTheater = value;
+			}
+		}
 
 		public BoxOfficeSource ()
 		{
@@ -48,17 +77,17 @@ namespace RottenTomatoes
 			SectionType type = (SectionType)section;
 
 			switch (type) {
-				case SectionType.OpeningThisWeek:
-					return Strings.OpeningThisWeek;
+			case SectionType.OpeningThisWeek:
+				return Strings.OpeningThisWeek;
 
-				case SectionType.TopBoxOffice:
-					return Strings.TopBoxOffice;
+			case SectionType.TopBoxOffice:
+				return Strings.TopBoxOffice;
 
-				case SectionType.InTheaters:
-					return Strings.AlsoInTheaters;
+			case SectionType.InTheaters:
+				return Strings.AlsoInTheaters;
 
-				default:
-					throw new NotImplementedException();
+			default:
+				throw new NotImplementedException();
 			}
 		}
 
@@ -67,17 +96,17 @@ namespace RottenTomatoes
 			SectionType type = (SectionType)section;
 
 			switch (type) {
-				case SectionType.OpeningThisWeek:
-					return OpeningThisWeek;
+			case SectionType.OpeningThisWeek:
+				return OpeningThisWeek;
 
-				case SectionType.TopBoxOffice:
-					return TopBoxMovies;
+			case SectionType.TopBoxOffice:
+				return TopBoxMovies;
 
-				case SectionType.InTheaters:
-					return InTheater;
+			case SectionType.InTheaters:
+				return InTheater;
 
-				default:
-					throw new NotImplementedException();
+			default:
+				throw new NotImplementedException();
 			}
 		}
 
