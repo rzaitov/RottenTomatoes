@@ -40,6 +40,8 @@ namespace RottenTomatoes
 
 		public MovieDetailsView()
 		{
+			AccessibilityLabel = "MovieDetailsScreen";
+
 			BackgroundColor = UIColor.White;
 
 			_container = new UIView {
@@ -72,6 +74,9 @@ namespace RottenTomatoes
 			ImageInitializer.InitImageView(ImgPath.Indicators.FreshSmall, _fresIndicator);
 			ImageInitializer.InitImageView(ImgPath.Indicators.RottenSmall, _rottenIndicator);
 			ImageInitializer.InitImageView(ImgPath.Indicators.User, _usersIndicator);
+
+			_fresIndicator.AccessibilityLabel = "freshIndicator";
+			_rottenIndicator.AccessibilityLabel = "rottenIndicator";
 
 			_topReleaseDate.Font = Fonts.Regular14;
 			_mppaRuntime.Font = Fonts.Regular14;

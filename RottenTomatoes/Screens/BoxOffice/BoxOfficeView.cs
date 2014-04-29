@@ -13,7 +13,7 @@ namespace RottenTomatoes
 
 		public BoxOfficeView ()
 		{
-			this.AccessibilityLabel = "BoxOfficeScreen";
+			AccessibilityLabel = "BoxOfficeScreen";
 
 			BackgroundColor = UIColor.White;
 
