@@ -11,11 +11,10 @@ namespace Logic
 
 		void GetInTheatersAsync(Action<IList<Movie>> callback);
 
-		void GetMovieDetails(string movieId, Action<MovieDetails> callback);
+		void GetMovieDetailsAsync(string movieId, Action<MovieDetails> callback);
 
-		void GetMovieReviews(string movieId, Action<IList<Review>> callback);
+		void GetMovieReviewsAsync(string movieId, Action<IList<Review>> callback);
 
-		void GetMovieFullCast(string movieId, Action<IList<Cast>> callback);
+		void GetMovieFullCastAsync(string movieId, Action<IList<Cast>> callback);
 	}
 }
-

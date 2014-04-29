@@ -24,7 +24,7 @@ namespace Logic
 			FuncTools.SafeInvoke(callback, root.movies);
 		}
 
-		public void GetMovieDetails(string movieId, Action<MovieDetails> callback)
+		public void GetMovieDetailsAsync(string movieId, Action<MovieDetails> callback)
 		{
 			throw new NotImplementedException();
 		}
@@ -34,7 +34,7 @@ namespace Logic
 			throw new NotImplementedException();
 		}
 
-		public void GetMovieFullCast(string movieId, Action<IList<Cast>> callback)
+		public void GetMovieFullCastAsync(string movieId, Action<IList<Cast>> callback)
 		{
 			throw new NotImplementedException();
 		}
