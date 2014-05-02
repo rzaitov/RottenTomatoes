@@ -1,6 +1,7 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using Logic;
+using System.Threading.Tasks;
 
 namespace RottenTomatoes
 {
@@ -49,23 +50,23 @@ namespace RottenTomatoes
 
 		private void RequestInfoAsync()
 		{
-			_service.GetOpeningThisWeekAsync (movies => {
+			_service.GetOpeningThisWeekAsync().ContinueWith(t => {
 				BeginInvokeOnMainThread (() => {
-					_view.ShowOpeningThisWeek (movies);
+				_view.ShowOpeningThisWeek(t.Result);
 				});
-			});
+			}, TaskContinuationOptions.OnlyOnRanToCompletion);
 
-			_service.GetTopBoxOfficeAsync (movies => {
+			_service.GetTopBoxOfficeAsync().ContinueWith(t => {
 				BeginInvokeOnMainThread (() => {
-					_view.ShowTopBoxOffice (movies);
+					_view.ShowTopBoxOffice (t.Result);
 				});
-			});
+			}, TaskContinuationOptions.OnlyOnRanToCompletion);
 
-			_service.GetInTheatersAsync (movies => {
+			_service.GetInTheatersAsync().ContinueWith(t => {
 				BeginInvokeOnMainThread (() => {
-					_view.ShowInTheaters (movies);
+					_view.ShowInTheaters (t.Result);
 				});
-			});
+			}, TaskContinuationOptions.OnlyOnRanToCompletion);
 		}
 	}
 }

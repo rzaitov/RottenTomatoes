@@ -2,6 +2,7 @@
 using MonoTouch.UIKit;
 using Logic;
 using MonoTouch.Foundation;
+using System.Threading.Tasks;
 
 namespace RottenTomatoes
 {
@@ -38,23 +39,23 @@ namespace RottenTomatoes
 			_view.ScrollToTop();
 			_view.HideContent();
 
-			_service.GetMovieDetailsAsync(MovieId, movieDetails =>
+			_service.GetMovieDetailsAsync(MovieId).ContinueWith(t =>
 				InvokeOnMainThread(() => {
 					_view.ShowContent();
-					_view.BindMovieDetails(movieDetails);
-				}));
+					_view.BindMovieDetails(t.Result);
+				}), TaskContinuationOptions.OnlyOnRanToCompletion);
 
-			_service.GetMovieReviewsAsync(MovieId, reviews =>
+			_service.GetMovieReviewsAsync(MovieId).ContinueWith(t =>
 				InvokeOnMainThread(() => {
 					_view.ShowContent();
-					_view.BindCriticsReviews(reviews);
-				}));
+					_view.BindCriticsReviews(t.Result);
+				}), TaskContinuationOptions.OnlyOnRanToCompletion);
 
-			_service.GetMovieFullCastAsync(MovieId, fullCast =>
+			_service.GetMovieFullCastAsync(MovieId).ContinueWith(t =>
 				InvokeOnMainThread(() => {
 					_view.ShowContent();
-					_view.BindCast(fullCast);
-				}));
+					_view.BindCast(t.Result);
+				}), TaskContinuationOptions.OnlyOnRanToCompletion);
 		}
 
 		[BubbleEventHandler("moreClicked")]

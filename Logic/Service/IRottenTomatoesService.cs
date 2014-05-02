@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Logic
 {
 	public interface IRottenTomatoesService
 	{
-		void GetTopBoxOfficeAsync(Action<IList<Movie>> callback);
+		Task<IList<Movie>> GetTopBoxOfficeAsync();
 
-		void GetOpeningThisWeekAsync(Action<IList<Movie>> callback);
+		Task<IList<Movie>> GetOpeningThisWeekAsync();
 
-		void GetInTheatersAsync(Action<IList<Movie>> callback);
+		Task<IList<Movie>> GetInTheatersAsync();
 
-		void GetMovieDetailsAsync(string movieId, Action<MovieDetails> callback);
+		Task<MovieDetails> GetMovieDetailsAsync(string movieId);
 
-		void GetMovieReviewsAsync(string movieId, Action<IList<Review>> callback);
+		Task<IList<Review>> GetMovieReviewsAsync(string movieId);
 
-		void GetMovieFullCastAsync(string movieId, Action<IList<Cast>> callback);
+		Task<IList<Cast>> GetMovieFullCastAsync(string movieId);
 	}
 }

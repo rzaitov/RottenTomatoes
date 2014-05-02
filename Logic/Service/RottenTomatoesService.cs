@@ -3,6 +3,7 @@ using System.Net.Http;
 
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Logic
 {
@@ -27,46 +28,61 @@ namespace Logic
 			KeyQuery = string.Format("apikey={0}", Key);
 		}
 
-		public void GetTopBoxOfficeAsync(Action<IList<Movie>> callback)
+		public Task<IList<Movie>> GetTopBoxOfficeAsync()
 		{
-			RequestMoviesList(TopBoxOfficeResource, callback);
+			return RequestMoviesList(TopBoxOfficeResource);
 		}
 
-		public void GetOpeningThisWeekAsync(Action<IList<Movie>> callback)
+		public Task<IList<Movie>> GetOpeningThisWeekAsync()
 		{
-			RequestMoviesList(OpeningThisWeekResource, callback);
+			return RequestMoviesList(OpeningThisWeekResource);
 		}
 
-		public void GetInTheatersAsync(Action<IList<Movie>> callback)
+		public Task<IList<Movie>> GetInTheatersAsync()
 		{
-			RequestMoviesList(InTheatersResource, callback);
+			return RequestMoviesList(InTheatersResource);
 		}
 
-		private void RequestMoviesList(string resource, Action<IList<Movie>> callback)
+		private Task<IList<Movie>> RequestMoviesList(string resource)
 		{
 			Uri uri = CreateForResource(resource);
-			ExecuteAsync<MoviesRootObject>(uri, root => callback(root.movies));
+
+			return ExecuteAsync<MoviesRootObject>(uri).ContinueWith(t => {
+				return (IList<Movie>)t.Result.movies;
+			});
 		}
 
-		public void GetMovieDetailsAsync(string movieId, Action<MovieDetails> callback)
+		public Task<MovieDetails> GetMovieDetailsAsync(string movieId)
 		{
 			string resource = string.Format(MovieDetailsResourcePattern, movieId);
 			Uri movieDetailsUri = CreateForResource(resource);
-			ExecuteAsync<MovieDetails>(movieDetailsUri, callback);
+
+			return ExecuteAsync<MovieDetails>(movieDetailsUri);
 		}
 
-		public void GetMovieReviewsAsync(string movieId, Action<IList<Review>> callback)
+		public Task<IList<Review>> GetMovieReviewsAsync(string movieId)
 		{
 			string resource = string.Format(MovieReviesResourcePattern, movieId);
 			Uri movieReviewsUri = CreateForResource(resource);
-			ExecuteAsync<CriticsRootObject>(movieReviewsUri, cro => callback(cro.reviews));
+
+			return ExecuteAsync<CriticsRootObject>(movieReviewsUri).ContinueWith(t => {
+				return (IList<Review>)t.Result.reviews;
+			});
 		}
 
-		public void GetMovieFullCastAsync(string movieId, Action<IList<Cast>> callback)
+		public Task<IList<Cast>> GetMovieFullCastAsync(string movieId)
 		{
 			string resource = string.Format(MovieFullCastPattern, movieId);
 			Uri movieFullCastUri = CreateForResource(resource);
-			ExecuteAsync<CastRootObject>(movieFullCastUri, cro => callback(cro.cast));
+
+			return ExecuteAsync<CastRootObject>(movieFullCastUri).ContinueWith(t => {
+				return (IList<Cast>)t.Result.cast;
+			});
+		}
+
+		public void GetMovieFullDetailsAsync(string movieId, Action callback)
+		{
+
 		}
 
 		private Uri CreateForResource(string resource)
